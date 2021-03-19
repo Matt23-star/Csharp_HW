@@ -1,0 +1,13 @@
+E:\C#homework\Homework\homework4\questionTwo\bin\Debug\netcoreapp3.1\questionTwo.exe
+E:\C#homework\Homework\homework4\questionTwo\bin\Debug\netcoreapp3.1\questionTwo.deps.json
+E:\C#homework\Homework\homework4\questionTwo\bin\Debug\netcoreapp3.1\questionTwo.runtimeconfig.json
+E:\C#homework\Homework\homework4\questionTwo\bin\Debug\netcoreapp3.1\questionTwo.runtimeconfig.dev.json
+E:\C#homework\Homework\homework4\questionTwo\bin\Debug\netcoreapp3.1\questionTwo.dll
+E:\C#homework\Homework\homework4\questionTwo\bin\Debug\netcoreapp3.1\questionTwo.pdb
+E:\C#homework\Homework\homework4\questionTwo\obj\Debug\netcoreapp3.1\questionTwo.csprojAssemblyReference.cache
+E:\C#homework\Homework\homework4\questionTwo\obj\Debug\netcoreapp3.1\questionTwo.AssemblyInfoInputs.cache
+E:\C#homework\Homework\homework4\questionTwo\obj\Debug\netcoreapp3.1\questionTwo.AssemblyInfo.cs
+E:\C#homework\Homework\homework4\questionTwo\obj\Debug\netcoreapp3.1\questionTwo.csproj.CoreCompileInputs.cache
+E:\C#homework\Homework\homework4\questionTwo\obj\Debug\netcoreapp3.1\questionTwo.dll
+E:\C#homework\Homework\homework4\questionTwo\obj\Debug\netcoreapp3.1\questionTwo.pdb
+E:\C#homework\Homework\homework4\questionTwo\obj\Debug\netcoreapp3.1\questionTwo.genruntimeconfig.cache
