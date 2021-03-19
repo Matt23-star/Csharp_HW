@@ -4,23 +4,19 @@ using System.Text;
 
 namespace questionTwo
 {
-    public class ClockEventArgs : EventArgs
-    {
-        public int ticktocks = 0;
-    }
 
-    public delegate void ClockEventHandler(Object sender, ClockEventArgs clockEventArgs , int ringTime);
+    public delegate void ClockEventHandler(Object sender, ClockEventArgs clockEventArgs , ClockEventArgs ringTime);
 
     class Clock
     {
-        public int RingTime { get; set; }
+        public ClockEventArgs RingTime { get; set; }
 
         public Clock()
         {
 
         }
 
-        public Clock(int ringTime)
+        public Clock(ClockEventArgs ringTime)
         {
             this.RingTime = ringTime;
         }
@@ -31,6 +27,7 @@ namespace questionTwo
         {
             int ticktocks = 10000;
             int i = 0;
+            ClockEventArgs args = new ClockEventArgs();
             while (i < ticktocks)
             {
                 //每一秒 i 增加 1
@@ -40,8 +37,7 @@ namespace questionTwo
                 //每经过一秒钟发生一个事件
                 if (Timing != null)
                 {
-                    ClockEventArgs args = new ClockEventArgs();
-                    args.ticktocks = i;
+                    args.TimeIncrease();
                     Timing(this, args, RingTime);
                 }
             }

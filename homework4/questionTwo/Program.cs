@@ -8,15 +8,17 @@ namespace questionTwo
         {
             var clock = new Clock();
             //设置响铃时间 第10秒响铃
-            clock.RingTime = 10;
+            ClockEventArgs ringTime = new ClockEventArgs(10);
+            clock.RingTime = ringTime;
             //注册事件
             clock.Timing += AlarmEvent;
             clock.TimePass();
         }
 
-        public static void AlarmEvent(object sender, ClockEventArgs clockEventArgs, int ringTime)
+        public static void AlarmEvent(object sender, ClockEventArgs clockEventArgs, ClockEventArgs ringTime)
         {
-            if(clockEventArgs.ticktocks == ringTime)
+            clockEventArgs.PrintTime();
+            if (clockEventArgs.IsEqual(ringTime))
             {
                 Console.WriteLine("闹钟：响铃了！！！");
             }
