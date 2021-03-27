@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -9,6 +9,7 @@ namespace questionTwo
         public int Second { get; set; }
         public int Minute { get; set; }
         public int Hour { get; set; }
+
         public int Day { get; set; }
 
         public ClockEventArgs()

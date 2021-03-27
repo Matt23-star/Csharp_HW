@@ -1,0 +1,13 @@
+E:\C#homework\Homework\Homework5\questionOne\obj\Debug\netcoreapp3.1\questionOne.csprojAssemblyReference.cache
+E:\C#homework\Homework\Homework5\questionOne\obj\Debug\netcoreapp3.1\questionOne.AssemblyInfoInputs.cache
+E:\C#homework\Homework\Homework5\questionOne\obj\Debug\netcoreapp3.1\questionOne.AssemblyInfo.cs
+E:\C#homework\Homework\Homework5\questionOne\obj\Debug\netcoreapp3.1\questionOne.csproj.CoreCompileInputs.cache
+E:\C#homework\Homework\Homework5\questionOne\bin\Debug\netcoreapp3.1\questionOne.exe
+E:\C#homework\Homework\Homework5\questionOne\bin\Debug\netcoreapp3.1\questionOne.deps.json
+E:\C#homework\Homework\Homework5\questionOne\bin\Debug\netcoreapp3.1\questionOne.runtimeconfig.json
+E:\C#homework\Homework\Homework5\questionOne\bin\Debug\netcoreapp3.1\questionOne.runtimeconfig.dev.json
+E:\C#homework\Homework\Homework5\questionOne\bin\Debug\netcoreapp3.1\questionOne.dll
+E:\C#homework\Homework\Homework5\questionOne\bin\Debug\netcoreapp3.1\questionOne.pdb
+E:\C#homework\Homework\Homework5\questionOne\obj\Debug\netcoreapp3.1\questionOne.dll
+E:\C#homework\Homework\Homework5\questionOne\obj\Debug\netcoreapp3.1\questionOne.pdb
+E:\C#homework\Homework\Homework5\questionOne\obj\Debug\netcoreapp3.1\questionOne.genruntimeconfig.cache

@@ -32,14 +32,14 @@ namespace questionTwo
         {
             switch (key)
             {
-                case 0: return new Rectangular((random.Next(1, 10) + random.NextDouble()),
+                case 0: return new Rectangle((random.Next(1, 10) + random.NextDouble()),
                     (random.Next(1, 10) + random.NextDouble()));
                 case 1: return new Square(random.Next(1, 10) + random.NextDouble());
                 case 2: return new Triangle((random.Next(1, 10) + random.NextDouble()),
                     (random.Next(1, 10) + random.NextDouble()),
                     (random.Next(1, 10) + random.NextDouble()));
             }
-            return new Rectangular(0, 0);
+            return new Rectangle(0, 0);
         }
     }
 

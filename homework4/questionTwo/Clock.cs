@@ -5,9 +5,9 @@ using System.Text;
 namespace questionTwo
 {
 
-    public delegate void ClockEventHandler(Object sender, ClockEventArgs clockEventArgs , ClockEventArgs ringTime);
+    public delegate void ClockEventHandler(Clock sender, ClockEventArgs clockEventArgs);
 
-    class Clock
+    public class Clock
     {
         public ClockEventArgs RingTime { get; set; }
 
@@ -22,6 +22,11 @@ namespace questionTwo
         }
 
         public event ClockEventHandler Timing;
+
+        public bool IsRing(ClockEventArgs clockEventArgs)
+        {
+            return clockEventArgs.IsEqual(RingTime);
+        }
 
         public void TimePass()
         {
@@ -38,7 +43,7 @@ namespace questionTwo
                 if (Timing != null)
                 {
                     args.TimeIncrease();
-                    Timing(this, args, RingTime);
+                    Timing(this, args);
                 }
             }
         }

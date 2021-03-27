@@ -32,11 +32,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\C#project\\homework3\\questionTwo\\questionTwo.csproj",
+      "projectUniqueName": "E:\\C#homework\\Homework\\homework3\\questionTwo\\questionTwo.csproj",
       "projectName": "questionTwo",
-      "projectPath": "E:\\C#project\\homework3\\questionTwo\\questionTwo.csproj",
+      "projectPath": "E:\\C#homework\\Homework\\homework3\\questionTwo\\questionTwo.csproj",
       "packagesPath": "C:\\Users\\82525\\.nuget\\packages\\",
-      "outputPath": "E:\\C#project\\homework3\\questionTwo\\obj\\",
+      "outputPath": "E:\\C#homework\\Homework\\homework3\\questionTwo\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\82525\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -53,8 +53,8 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "E:\\C#project\\homework3\\questionOne\\questionOne.csproj": {
-              "projectPath": "E:\\C#project\\homework3\\questionOne\\questionOne.csproj"
+            "E:\\C#homework\\Homework\\homework3\\questionOne\\questionOne.csproj": {
+              "projectPath": "E:\\C#homework\\Homework\\homework3\\questionOne\\questionOne.csproj"
             }
           }
         }

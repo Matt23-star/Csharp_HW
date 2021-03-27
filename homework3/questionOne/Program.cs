@@ -16,13 +16,13 @@ namespace questionOne
         public bool Judge();
     }
 
-    public class Rectangular : Shape
+    public class Rectangle : Shape
     {
-        protected double a;
-        protected double b;
+        protected double a { get; set; }
+        protected double b { get; set; }
 
 
-        public Rectangular(double a,double b)
+        public Rectangle(double a,double b)
         {
             this.a = a;
             this.b = b;
@@ -41,9 +41,9 @@ namespace questionOne
         }
     }
 
-    public class Square : Rectangular
+    public class Square : Rectangle
     {
-        private double side;
+        private double side { get; set; }
         public Square(double side) : base( side,side)
         {
             this.side = side;
@@ -64,9 +64,9 @@ namespace questionOne
 
     public class Triangle:Shape
     {
-        private double a;
-        private double b;
-        private double c;
+        private double a { get; set; }
+        private double b { get; set; }
+        private double c { get; set; }
 
         public Triangle(double a, double b, double c)
         {
