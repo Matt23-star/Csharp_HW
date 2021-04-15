@@ -1,0 +1,10 @@
+E:\C#homework\Homework\homework7\printTree\bin\Debug\printTree.exe.config
+E:\C#homework\Homework\homework7\printTree\bin\Debug\printTree.exe
+E:\C#homework\Homework\homework7\printTree\bin\Debug\printTree.pdb
+E:\C#homework\Homework\homework7\printTree\obj\Debug\printTree.Form1.resources
+E:\C#homework\Homework\homework7\printTree\obj\Debug\printTree.Properties.Resources.resources
+E:\C#homework\Homework\homework7\printTree\obj\Debug\printTree.csproj.GenerateResource.cache
+E:\C#homework\Homework\homework7\printTree\obj\Debug\printTree.csproj.CoreCompileInputs.cache
+E:\C#homework\Homework\homework7\printTree\obj\Debug\printTree.exe
+E:\C#homework\Homework\homework7\printTree\obj\Debug\printTree.pdb
+E:\C#homework\Homework\homework7\printTree\obj\Debug\printTree.csprojAssemblyReference.cache
