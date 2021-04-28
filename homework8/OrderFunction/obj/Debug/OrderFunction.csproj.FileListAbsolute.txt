@@ -1,0 +1,6 @@
+E:\C#homework\Homework\homework8\OrderFunction\obj\Debug\OrderFunction.csproj.CoreCompileInputs.cache
+E:\C#homework\Homework\homework8\OrderFunction\bin\Debug\OrderFunction.exe.config
+E:\C#homework\Homework\homework8\OrderFunction\bin\Debug\OrderFunction.exe
+E:\C#homework\Homework\homework8\OrderFunction\bin\Debug\OrderFunction.pdb
+E:\C#homework\Homework\homework8\OrderFunction\obj\Debug\OrderFunction.exe
+E:\C#homework\Homework\homework8\OrderFunction\obj\Debug\OrderFunction.pdb

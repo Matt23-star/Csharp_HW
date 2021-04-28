@@ -1,0 +1,14 @@
+E:\C#homework\Homework\homework8\WinForm\bin\Debug\WinForm.exe.config
+E:\C#homework\Homework\homework8\WinForm\bin\Debug\WinForm.exe
+E:\C#homework\Homework\homework8\WinForm\bin\Debug\WinForm.pdb
+E:\C#homework\Homework\homework8\WinForm\obj\Debug\WinForm.Form1.resources
+E:\C#homework\Homework\homework8\WinForm\obj\Debug\WinForm.Properties.Resources.resources
+E:\C#homework\Homework\homework8\WinForm\obj\Debug\WinForm.csproj.GenerateResource.cache
+E:\C#homework\Homework\homework8\WinForm\obj\Debug\WinForm.csproj.CoreCompileInputs.cache
+E:\C#homework\Homework\homework8\WinForm\obj\Debug\WinForm.exe
+E:\C#homework\Homework\homework8\WinForm\obj\Debug\WinForm.pdb
+E:\C#homework\Homework\homework8\WinForm\bin\Debug\OrderFunction.exe
+E:\C#homework\Homework\homework8\WinForm\bin\Debug\OrderFunction.pdb
+E:\C#homework\Homework\homework8\WinForm\bin\Debug\OrderFunction.exe.config
+E:\C#homework\Homework\homework8\WinForm\obj\Debug\WinForm.csprojAssemblyReference.cache
+E:\C#homework\Homework\homework8\WinForm\obj\Debug\WinForm.csproj.CopyComplete

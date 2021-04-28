@@ -1,4 +1,3 @@
-E:\C#homework\Homework\Homework5\questionOne\obj\Debug\netcoreapp3.1\questionOne.csprojAssemblyReference.cache
 E:\C#homework\Homework\Homework5\questionOne\obj\Debug\netcoreapp3.1\questionOne.AssemblyInfoInputs.cache
 E:\C#homework\Homework\Homework5\questionOne\obj\Debug\netcoreapp3.1\questionOne.AssemblyInfo.cs
 E:\C#homework\Homework\Homework5\questionOne\obj\Debug\netcoreapp3.1\questionOne.csproj.CoreCompileInputs.cache
