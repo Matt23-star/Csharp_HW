@@ -12,40 +12,11 @@ using System.Threading.Tasks;
 namespace Crawler {
     public class SimpleCrawler
     {
-        private Hashtable urls = new Hashtable();
-        private int count = 0;
-        private string startURL;
-
-        /*static void Main(string[] args) {
-          SimpleCrawler myCrawler = new SimpleCrawler();
-          string startUrl = "http://www.cnblogs.com/dstang2000/";
-          if (args.Length >= 1) startUrl = args[0];
-          myCrawler.urls.Add(startUrl, false);//加入初始页面
-          new Thread(myCrawler.Crawl).Start();
-        }
-        */
-
-        private void Crawl()
-        {
-            Console.WriteLine("开始爬行了.... ");
-            while (true)
-            {
-                string current = null;
-                foreach (string url in urls.Keys)
-                {
-                    if ((bool)urls[url]) continue;
-                    current = url;
-                }
-
-                if (current == null || count > 10) break;
-                Console.WriteLine("爬行" + current + "页面!");
-                string html = DownLoad(current); // 下载
-                urls[current] = true;
-                count++;
-                Parse(html);//解析,并加入新的链接
-                Console.WriteLine("爬行结束");
-            }
-        }
+        public Hashtable urls { get; set; } = new Hashtable();
+        public int count { get; set; } = 0;
+        public List<Url> urlList { get; set; } = new List<Url>();
+        public List<State> stateList { get; set; } = new List<State>();
+        private State state;
 
         public string DownLoad(string url)
         {
@@ -56,24 +27,34 @@ namespace Crawler {
                 string html = webClient.DownloadString(url);
                 string fileName = count.ToString();
                 File.WriteAllText(fileName, html, Encoding.UTF8);
+                state = new State("爬取成功");
+                stateList.Add(state);
                 return html;
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                stateList.Add(new State(ex.Message));
                 return "";
             }
         }
 
-        private void Parse(string html)
+        public void Parse(string html, string startUrl)
         {
-            string strRef = @"(href|HREF)[]*=[]*[""'][^""'#>]+[""']";
+            string strRef = @"(href|HREF)[]*=[]*[""'][^""'#>]+(html|htm|aspx|jsp)[""']";
             MatchCollection matches = new Regex(strRef).Matches(html);
             foreach (Match match in matches)
             {
                 strRef = match.Value.Substring(match.Value.IndexOf('=') + 1)
                           .Trim('"', '\"', '#', '>');
                 if (strRef.Length == 0) continue;
+                if (!Regex.IsMatch(strRef, @"http"))
+                {
+                    strRef = startUrl + strRef.Substring(1, strRef.Length - 1);
+                }
+                else if (!Regex.IsMatch(strRef, startUrl))
+                {
+                    continue;
+                }
                 if (urls[strRef] == null) urls[strRef] = false;
             }
         }

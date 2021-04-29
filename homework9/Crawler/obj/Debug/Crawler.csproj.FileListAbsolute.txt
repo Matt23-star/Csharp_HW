@@ -8,3 +8,13 @@ D:\C#homework\homework9\Crawler\bin\Debug\Crawler.pdb
 D:\C#homework\homework9\Crawler\obj\Debug\Crawler.exe
 D:\C#homework\homework9\Crawler\obj\Debug\Crawler.pdb
 D:\C#homework\homework9\Crawler\obj\Debug\Crawler.csprojAssemblyReference.cache
+D:\C#homework\Homework\homework9\Crawler\bin\Debug\Crawler.exe.config
+D:\C#homework\Homework\homework9\Crawler\bin\Debug\Crawler.exe
+D:\C#homework\Homework\homework9\Crawler\bin\Debug\Crawler.pdb
+D:\C#homework\Homework\homework9\Crawler\obj\Debug\Crawler.csprojAssemblyReference.cache
+D:\C#homework\Homework\homework9\Crawler\obj\Debug\Crawler.Form1.resources
+D:\C#homework\Homework\homework9\Crawler\obj\Debug\Crawler.Properties.Resources.resources
+D:\C#homework\Homework\homework9\Crawler\obj\Debug\Crawler.csproj.GenerateResource.cache
+D:\C#homework\Homework\homework9\Crawler\obj\Debug\Crawler.csproj.CoreCompileInputs.cache
+D:\C#homework\Homework\homework9\Crawler\obj\Debug\Crawler.exe
+D:\C#homework\Homework\homework9\Crawler\obj\Debug\Crawler.pdb

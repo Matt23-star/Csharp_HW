@@ -1,0 +1,6 @@
+D:\C#homework\Homework\homework8\OrderService\bin\Debug\OrderService.exe.config
+D:\C#homework\Homework\homework8\OrderService\bin\Debug\OrderService.exe
+D:\C#homework\Homework\homework8\OrderService\bin\Debug\OrderService.pdb
+D:\C#homework\Homework\homework8\OrderService\obj\Debug\OrderFunction.csproj.CoreCompileInputs.cache
+D:\C#homework\Homework\homework8\OrderService\obj\Debug\OrderService.exe
+D:\C#homework\Homework\homework8\OrderService\obj\Debug\OrderService.pdb

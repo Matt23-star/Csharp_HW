@@ -1,0 +1,16 @@
+D:\C#homework\Homework\homework8\OrderForms\bin\Debug\OrderForms.exe.config
+D:\C#homework\Homework\homework8\OrderForms\bin\Debug\OrderForms.exe
+D:\C#homework\Homework\homework8\OrderForms\bin\Debug\OrderForms.pdb
+D:\C#homework\Homework\homework8\OrderForms\obj\Debug\OrderForms.csprojAssemblyReference.cache
+D:\C#homework\Homework\homework8\OrderForms\obj\Debug\OrderForms.Properties.Resources.resources
+D:\C#homework\Homework\homework8\OrderForms\obj\Debug\OrderForms.csproj.GenerateResource.cache
+D:\C#homework\Homework\homework8\OrderForms\obj\Debug\OrderForms.csproj.CoreCompileInputs.cache
+D:\C#homework\Homework\homework8\OrderForms\obj\Debug\OrderForms.exe
+D:\C#homework\Homework\homework8\OrderForms\obj\Debug\OrderForms.pdb
+D:\C#homework\Homework\homework8\OrderForms\bin\Debug\OrderService.exe
+D:\C#homework\Homework\homework8\OrderForms\bin\Debug\OrderService.pdb
+D:\C#homework\Homework\homework8\OrderForms\bin\Debug\OrderService.exe.config
+D:\C#homework\Homework\homework8\OrderForms\obj\Debug\OrderForms.csproj.CopyComplete
+D:\C#homework\Homework\homework8\OrderForms\obj\Debug\OrderForms.FormShowOrder.resources
+D:\C#homework\Homework\homework8\OrderForms\obj\Debug\OrderForms.FormAddOrder.resources
+D:\C#homework\Homework\homework8\OrderForms\obj\Debug\OrderForms.FormAddDetail.resources
