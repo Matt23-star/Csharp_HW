@@ -1,1360 +1,298 @@
 ﻿<!DOCTYPE html>
-<html>
+<html lang="zh-cn">
 <head>
     <meta charset="utf-8" />
-    <meta name="referrer" content="always" />
-    <title>IT新闻 - 博客园</title>
-    <meta name="keywords" content="IT新闻,it news,互联网新闻,业界新闻,IT资讯,IT业界,新闻频道" />
-    <meta name="description">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <link id="rsslink" title="rss" type="application/rss+xml" rel="alternate" href="http://feed.cnblogs.com/news/rss" />
-    <link rel="shortcut icon" href="//common.cnblogs.com/favicon.ico" />
-    <link rel="stylesheet" href="/Content/bundles/news.css?v=3xP9uuDECgAlC6BJj9zLyJMsa0nKoD5dAt4paP25qKM" />
-    <link rel="stylesheet" type="text/css" href="//mention.cnblogs.com/css/mention-simple.css?id=20160613">
-    <link id="smallScreen" rel="stylesheet" type="text/css" media="screen and (max-width:768px)" href="/Content/smallScreen.css?v=nefLI3mgFt-9OMgJr0ayftmT0REvBpYq2wb0OMDO1pY" />
-    <script type="text/javascript" src="/Scripts/jquery.min.js"></script>
-    <script type="text/javascript" src="/Scripts/bundles/news.js?v=NWzOaUGAd-DmDHBEBJ-MPL3eLK8Vpc26nS6ubbAaS3o"></script>
-    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin-when-crossorigin" />
+    <meta name="description" content="xml与json在javascript中解析并使用，速度大约相差4倍。（在IE中测试的结果）。其中主要不在于eval,与xml parse的时间差别，主要在于属性访问上的差别：xml中使用这样的方式 " />
+    <meta property="og:description" content="xml与json在javascript中解析并使用，速度大约相差4倍。（在IE中测试的结果）。其中主要不在于eval,与xml parse的时间差别，主要在于属性访问上的差别：xml中使用这样的方式 " />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>实测:xml与json速度约差4倍 - 拓荒者 - 博客园</title>
+    <link id="favicon" rel="shortcut icon" href="//common.cnblogs.com/favicon.svg" type="image/svg+xml" />
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=zS6-e1bxywlu3kpHvpr1J6MySwya3ztFtEnS7RYQ0Fk" />
+    <link id="MainCss" rel="stylesheet" href="/skins/anothereon001/bundle-anothereon001.min.css?v=9x2ZP2K8SSBJowZA6xv0D5FvOmlvd5g21u0NBEAEwfQ" />
+    
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/anothereon001/bundle-anothereon001-mobile.min.css?v=xFiYH0_zTHqf_pk9Nf2PvR4VdQ1qJnJcRVcot-VdM-8" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/dstang2000/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/dstang2000/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/dstang2000/wlwmanifest.xml" />
     <script>
-        var googletag = googletag || {};
-        googletag.cmd = googletag.cmd || [];
+        var currentBlogId = 9986;
+        var currentBlogApp = 'dstang2000';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var isBlogOwner = false;
+        var skinName = 'AnotherEon001';
+        var visitorUserId = '';
     </script>
-    <script>
-        googletag.cmd.push(function () {
-            googletag.defineSlot('/1090369/news_E1', [728, 90], 'div-gpt-ad-1533633736227-0').addService(googletag.pubads());
-            googletag.defineSlot('/1090369/news_E2', [300, 250], 'div-gpt-ad-1533633736227-1').addService(googletag.pubads());
-            googletag.defineSlot('/1090369/news_E3', [300, 250], 'div-gpt-ad-1533633736227-2').addService(googletag.pubads());
-            googletag.defineSlot('/1090369/news_E4', [468, 60], 'div-gpt-ad-1533633736227-3').addService(googletag.pubads());
-            googletag.pubads().enableSingleRequest();
-            googletag.enableServices();
-        });
-    </script>
+        <script>
+            var currentPostDateAdded = '2010-11-02 05:43';
+        </script>
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=CJtNAb53Ex2fBes_h70ZUTUv5aZTxcvvM7mCnA44svE"></script>
+    
+    
+    
 </head>
-<body>
+<body class="has-navbar has-bannerbar">
     <a name="top"></a>
-    <div id="wrap">
-        <div id="header">
-            <a name="top"></a>
-            <div id="wrapper_top_block">
-                <div id="login_area">
-                </div>
-                <div id="top_mini_nav_block">&laquo; <a href="//www.cnblogs.com" class="dark_gray" title="程序员的网上家园">网站首页</a> <a href="http://zzk.cnblogs.com/" class="dark_gray">找找看</a></div>
-                <div class="clear"></div>
+        <a target="_blank" href="https://www.aliyun.com/minisite/goods?userCode=swh7dvlt" onclick="ga('send', 'event', 'Link', 'click', 'aliyun-cps-blog-bannerbar-pc')">
+            <div class="bannerbar aliyun forpc" style="background-size: contain;background-image: url(https://img2020.cnblogs.com/blog/35695/202104/35695-20210428221933214-737067094.jpg)">
             </div>
+        </a>
+        <div id="bannerbar" class="bannerbar-mobile formobile">
+            <a href="https://www.aliyun.com/minisite/goods?userCode=swh7dvlt" target="_blank" onclick="ga('send', 'event', 'Link', 'click', 'aliyun-cps-blog-bannerbar-mobile')">
+                <img src="https://img2020.cnblogs.com/blog/35695/202104/35695-20210428213541700-642740375.jpg" alt="" />
+            </a>
         </div>
-    </div>
-    <div id="main_wrapper">
-        <div id="main_header">
-            <div class="header_div">
-                <div class="logo">
-                    <a href="//www.cnblogs.com">
-                        <img src="/Images/logo.gif" alt="logo" />
+    <div id="top_nav" class="navbar forpc">
+        <nav id="nav_main" class="navbar-main">
+            <ul id="nav_left" class="navbar-list navbar-left">
+                <li class="navbar-branding"><a href="https://www.cnblogs.com/" title="开发者的网上家园"><img src="/images/logo.svg?v=R9M0WmLAIPVydmdzE2keuvnjl-bPR7_35oHqtiBzGsM" alt="博客园Logo" /></a></li>
+                <li><a href="/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-sitehome')">首页</a></li>
+                <li><a href="https://news.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-news')">新闻</a></li>
+                <li><a href="https://q.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-q')">博问</a></li>
+                <li><a id="nav_brandzone" href="https://brands.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-brands')">专区</a></li>
+                <li><a href="https://ing.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-ing')">闪存</a></li>
+                <li><a href="https://edu.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-edu')">班级</a></li>
+            </ul>
+            <ul id="nav_right" class="navbar-list navbar-right">
+                <li>
+                    <form id="zzk_search" class="navbar-search" action="https://zzk.cnblogs.com/s" method="get">
+                        <input name="w" id="zzk_search_input" placeholder="代码改变世界" type="text" tabindex="3" />
+                        <button type="submit" id="zzk_search_button">
+                            <img src="/images/aggsite/search.svg" alt="搜索" />
+                        </button>
+                    </form>
+                </li>
+                <li id="navbar_login_status" class="navbar-list">
+                    <a class="navbar-user-info navbar-blog" href="https://i.cnblogs.com/EditPosts.aspx?opt=1" alt="写随笔" title="写随笔">
+                        <img id="new_post_icon" class="navbar-icon" src="/images/aggsite/newpost.svg" alt="写随笔" />
                     </a>
-                </div>
-                <div class="banner">
-                    <div id="clubHeader_panelNews">
-                        <div id="e1"></div>
+                    <a id="navblog-myblog-icon" class="navbar-user-info navbar-blog" href="https://passport.cnblogs.com/GetBlogApplyStatus.aspx" alt="我的博客" title="我的博客">
+                        <img id="myblog_icon" class="navbar-icon" src="/images/aggsite/myblog.svg" alt="我的博客" />
+                    </a>
+                    <a class="navbar-user-info navbar-message navbar-icon-wrapper" href="https://msg.cnblogs.com/" alt="短消息" title="短消息">
+                        <img id="msg_icon" class="navbar-icon" src="/images/aggsite/message.svg?v=J0WS2P2iPgaIVgXxcAhliw4AFZIpaTWxtdoNAv9eiCA" alt="短消息" />
+                        <span id="msg_count" style="display: none"></span>
+                    </a>
+                    <div id="user_info" class="navbar-user-info dropdown">
+                        <a class="dropdown-button" href="https://home.cnblogs.com/">
+                            <img id="user_icon" class="navbar-avatar" src="/images/aggsite/avatar-default.svg" alt="用户头像" />
+                        </a>
+                        <div class="dropdown-menu">
+                            <a id="navblog-myblog-text" href="https://passport.cnblogs.com/GetBlogApplyStatus.aspx">我的博客</a>
+                            <a href="https://home.cnblogs.com/">我的园子</a>
+                            <a href="https://account.cnblogs.com/settings/account">账号设置</a>
+                            <a href="javascript:void(0)" id="navbar_lite_mode_toggle" title="简洁模式会使用简洁款皮肤显示所有博客">
+    简洁模式 <img id="navbar_lite_mode_on" src="/images/lite-mode-check.svg" class="hide" /><span id="navbar_lite_mode_spinner" class="hide">...</span>
+</a>
+                            <a href="javascript:void(0)" onclick="account.logout();">退出登录</a>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="mainmenu">
-                <div class="feedback_block">
-                    <a href="//group.cnblogs.com/forum/public/">反馈问题或建议</a>
-                </div>
-                <ul id="navlist_main">
-                    <li style="margin-left:20px;">
-                        <a href="//www.cnblogs.com">首页</a>
-                    </li>
-                    <li>
-                        <a href="//home.cnblogs.com">园子</a>
-                    </li>
-                    <li>
-                    </li>
-                    <li id="clubHeader_liNews">
-                        <a id="clubHeader_lnkNews" title="IT新闻" class="current" href="/">新 闻</a>
-                    </li>
-                    <li>
-                        <a id="clubHeader_lkQuestionMenu" href="//q.cnblogs.com/">博问</a>
-                    </li>
-                    <li>
-                    </li>
-                    <li>
-                        <a id="clubHeader_lkIngMenu" href="//ing.cnblogs.com/">闪存</a>
-                    </li>
-                    <li>
-                        <a id="clubHeader_lnkWz" href="//wz.cnblogs.com/">收藏</a>
-                    </li>
-                    <li>
-                        <a href="https://brands.cnblogs.com/">专区</a>
-                    </li>
-                    <li>
-                        <a href="//kb.cnblogs.com">知识库</a>
-                    </li>
-                    <li id="clubHeader_liMyMessage">
-                    </li>
-                </ul>
-            </div>
-            <script type="text/javascript">
-                if (typeof (jQuery) != 'undefined') {
-                    GetUserInfo();
-                }
-            </script>
+                    <a class="navbar-anonymous" href="https://account.cnblogs.com/signup/">注册</a>
+                    <a class="navbar-anonymous" href="javascript:void(0);" onclick="account.login()">登录</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    
+    <div id="wrapper">
+<div id="header">
+
+<div id="top">
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/dstang2000/">拓荒者 dstang2000 <a href="http://www.dstang.com"><font size=-1 color=red>http://www.dstang.com</font></a>
+</h1>
+<div id="subtitle">KISS：Keeping things that work，Improve systems procedures styles，Start things of value，Stop things of no value </div>
+</div>
+<div id="sub"><div id="blog_stats_place_holder"><script>loadBlogStats();</script></div></div>
+
+
+
+
+</div>
+<div id="main_container">
+<div id="main_content">
+<div id="content">
+	<div id="post_detail">
+    <div class="post">
+        <h2>
+            
+<a id="cb_post_title_url" class="postTitle2 vertical-middle" href="https://www.cnblogs.com/dstang2000/archive/2010/11/02/1867406.html">
+    <span>实测:xml与json速度约差4倍</span>
+    
+
+
+
+</a>
+
+        </h2>
+        <div class="postbody">
+            <div id="cnblogs_post_body" class="blogpost-body blogpost-body-html">
+<p>xml与json在javascript中解析并使用，速度大约相差4倍。（在IE中测试的结果）。</p>
+<p>其中主要不在于eval,与xml parse的时间差别，主要在于属性访问上的差别：</p>
+<p>xml中使用这样的方式 markers[i].getAttribute("info") </p>
+<p>与json中使用这样的方式 var info = markers[i].info;</p>
+<p>相比， xml要慢不少。</p>
+<p>以下为测试的详情：</p>
+<p>&nbsp;</p>
+<div class="cnblogs_code"><img class="code_img_closed" id="code_img_closed_ee8d98db-5eac-4091-98e1-d524bfaeae80" src="https://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt=""><img class="code_img_opened" id="code_img_opened_ee8d98db-5eac-4091-98e1-d524bfaeae80" style="display: none" src="https://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif"><span class="cnblogs_code_collapse">代码</span>
+<div class="cnblogs_code_hide" id="cnblogs_code_open_ee8d98db-5eac-4091-98e1-d524bfaeae80">
+<div><span style="color: rgba(0, 0, 255, 1)">&lt;!</span><span style="color: rgba(255, 0, 255, 1)">DOCTYPE&nbsp;html&nbsp;PUBLIC&nbsp;"-//W3C//DTD&nbsp;XHTML&nbsp;1.0&nbsp;Strict//EN"<br>&nbsp;&nbsp;&nbsp;&nbsp;"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"</span><span style="color: rgba(0, 0, 255, 1)">&gt;</span><span style="color: rgba(0, 0, 0, 1)"><br></span><span style="color: rgba(0, 0, 255, 1)">&lt;</span><span style="color: rgba(128, 0, 0, 1)">html&nbsp;</span><span style="color: rgba(255, 0, 0, 1)">xmlns</span><span style="color: rgba(0, 0, 255, 1)">="http://www.w3.org/1999/xhtml"</span><span style="color: rgba(255, 0, 0, 1)">&nbsp;xmlns:v</span><span style="color: rgba(0, 0, 255, 1)">="urn:schemas-microsoft-com:vml"</span><span style="color: rgba(0, 0, 255, 1)">&gt;</span><span style="color: rgba(0, 0, 0, 1)"><br>&nbsp;&nbsp;</span><span style="color: rgba(0, 0, 255, 1)">&lt;</span><span style="color: rgba(128, 0, 0, 1)">head</span><span style="color: rgba(0, 0, 255, 1)">&gt;</span><span style="color: rgba(0, 0, 0, 1)"><br>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: rgba(0, 0, 255, 1)">&lt;</span><span style="color: rgba(128, 0, 0, 1)">meta&nbsp;</span><span style="color: rgba(255, 0, 0, 1)">http-equiv</span><span style="color: rgba(0, 0, 255, 1)">="content-type"</span><span style="color: rgba(255, 0, 0, 1)">&nbsp;content</span><span style="color: rgba(0, 0, 255, 1)">="text/html;&nbsp;charset=utf-8"</span><span style="color: rgba(0, 0, 255, 1)">/&gt;</span><span style="color: rgba(0, 0, 0, 1)"><br>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: rgba(0, 0, 255, 1)">&lt;</span><span style="color: rgba(128, 0, 0, 1)">title</span><span style="color: rgba(0, 0, 255, 1)">&gt;</span><span style="color: rgba(0, 0, 0, 1)">Google&nbsp;Maps&nbsp;JavaScript&nbsp;API&nbsp;Example:&nbsp;Simple&nbsp;Map</span><span style="color: rgba(0, 0, 255, 1)">&lt;/</span><span style="color: rgba(128, 0, 0, 1)">title</span><span style="color: rgba(0, 0, 255, 1)">&gt;</span><span style="color: rgba(0, 0, 0, 1)"><br>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: rgba(0, 0, 255, 1)">&lt;</span><span style="color: rgba(128, 0, 0, 1)">script&nbsp;</span><span style="color: rgba(255, 0, 0, 1)">src</span><span style="color: rgba(0, 0, 255, 1)">="http://maps.google.com/maps?file=api&amp;amp;v=2&amp;amp;key=ABQIAAAAzr2EBOXUKnm_jVnk0OJI7xSosDVG8KKPE1-m51RBrvYughuyMxQ-i1QfUnH94QxWIa6N4U6MouMmBA"</span><span style="color: rgba(255, 0, 0, 1)"><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type</span><span style="color: rgba(0, 0, 255, 1)">="text/javascript"</span><span style="color: rgba(0, 0, 255, 1)">&gt;&lt;/</span><span style="color: rgba(128, 0, 0, 1)">script</span><span style="color: rgba(0, 0, 255, 1)">&gt;</span><span style="color: rgba(0, 0, 0, 1)"><br>&nbsp;&nbsp;&nbsp;&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: rgba(0, 0, 255, 1)">&lt;</span><span style="color: rgba(128, 0, 0, 1)">script&nbsp;</span><span style="color: rgba(255, 0, 0, 1)">type</span><span style="color: rgba(0, 0, 255, 1)">="text/javascript"</span><span style="color: rgba(0, 0, 255, 1)">&gt;</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)"><br><br></span><span style="color: rgba(0, 128, 0, 1); background-color: rgba(245, 245, 245, 1)">//</span><span style="color: rgba(0, 128, 0, 1); background-color: rgba(245, 245, 245, 1)">全局变量</span><span style="color: rgba(0, 128, 0, 1); background-color: rgba(245, 245, 245, 1)"><br></span><span style="color: rgba(0, 0, 255, 1); background-color: rgba(245, 245, 245, 1)">var</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;map&nbsp;</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">=</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;</span><span style="color: rgba(0, 0, 255, 1); background-color: rgba(245, 245, 245, 1)">null</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">;<br><br></span><span style="color: rgba(0, 0, 255, 1); background-color: rgba(245, 245, 245, 1)">function</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;initialize()&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: rgba(0, 0, 255, 1); background-color: rgba(245, 245, 245, 1)">if</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;(</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">!</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">GBrowserIsCompatible())&nbsp;</span><span style="color: rgba(0, 0, 255, 1); background-color: rgba(245, 245, 245, 1)">return</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">;<br><br>&nbsp;&nbsp;&nbsp;&nbsp;map&nbsp;</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">=</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;</span><span style="color: rgba(0, 0, 255, 1); background-color: rgba(245, 245, 245, 1)">new</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;GMap2(document.getElementById(</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">"</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">map_canvas</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">"</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">));<br>&nbsp;&nbsp;&nbsp;&nbsp;map.addMapType(&nbsp;G_PHYSICAL_MAP&nbsp;);<br>&nbsp;&nbsp;&nbsp;&nbsp;map.addMapType(G_SATELLITE_3D_MAP);<br><br>&nbsp;&nbsp;&nbsp;&nbsp;map.setCenter(</span><span style="color: rgba(0, 0, 255, 1); background-color: rgba(245, 245, 245, 1)">new</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;GLatLng(</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">39.9</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">,&nbsp;</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">116.00</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">),&nbsp;</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">6</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">);<br><br>&nbsp;&nbsp;&nbsp;&nbsp;map.addControl(&nbsp;</span><span style="color: rgba(0, 0, 255, 1); background-color: rgba(245, 245, 245, 1)">new</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;GMapTypeControl()&nbsp;);<br>&nbsp;&nbsp;&nbsp;&nbsp;map.addControl(&nbsp;</span><span style="color: rgba(0, 0, 255, 1); background-color: rgba(245, 245, 245, 1)">new</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;GLargeMapControl()&nbsp;);<br><br>&nbsp;&nbsp;&nbsp;&nbsp;map.enableContinuousZoom();<br><br>&nbsp;&nbsp;&nbsp;&nbsp;GEvent.addListener(map,&nbsp;</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">"</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">mousemove</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">"</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">,&nbsp;</span><span style="color: rgba(0, 0, 255, 1); background-color: rgba(245, 245, 245, 1)">function</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">(p){<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: rgba(0, 0, 255, 1); background-color: rgba(245, 245, 245, 1)">if</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">(</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">!</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">p)</span><span style="color: rgba(0, 0, 255, 1); background-color: rgba(245, 245, 245, 1)">return</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">;&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;window.status&nbsp;</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">=</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">"</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">经纬度&nbsp;</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">"</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">+</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;(Math.round(p.lng()</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">*</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">100000</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">)</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">/</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">100000</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">)</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">+</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">"</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">,&nbsp;</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">"</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">+</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;(Math.round(p.lat()</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">*</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">100000</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">)</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">/</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">100000</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">);<br>&nbsp;&nbsp;&nbsp;&nbsp;});<br><br>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: rgba(0, 0, 255, 1); background-color: rgba(245, 245, 245, 1)">var</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;t0&nbsp;</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">=</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;</span><span style="color: rgba(0, 0, 255, 1); background-color: rgba(245, 245, 245, 1)">new</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;Date();<br>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: rgba(0, 0, 255, 1); background-color: rgba(245, 245, 245, 1)">for</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">(</span><span style="color: rgba(0, 0, 255, 1); background-color: rgba(245, 245, 245, 1)">var</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;i</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">=</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">0</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">;&nbsp;i</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&lt;</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">100</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">;&nbsp;i</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">++</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;){<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: rgba(0, 0, 255, 1); background-color: rgba(245, 245, 245, 1)">var</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;home_point&nbsp;</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">=</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;</span><span style="color: rgba(0, 0, 255, 1); background-color: rgba(245, 245, 245, 1)">new</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;GLatLng(</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">37.056136</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">+</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">i</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">/</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">1e4,114.457626+i</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">/</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">1e4</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">);&nbsp;&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;map.addOverlay(</span><span style="color: rgba(0, 0, 255, 1); background-color: rgba(245, 245, 245, 1)">new</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;GMarker(home_point));&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: rgba(0, 0, 255, 1); background-color: rgba(245, 245, 245, 1)">var</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;t1&nbsp;</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">=</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;</span><span style="color: rgba(0, 0, 255, 1); background-color: rgba(245, 245, 245, 1)">new</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;Date();<br>&nbsp;&nbsp;&nbsp;&nbsp;alert(t1</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">-</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">t0);&nbsp;</span><span style="color: rgba(0, 128, 0, 1); background-color: rgba(245, 245, 245, 1)">//</span><span style="color: rgba(0, 128, 0, 1); background-color: rgba(245, 245, 245, 1)">1000用时6.3秒</span><span style="color: rgba(0, 128, 0, 1); background-color: rgba(245, 245, 245, 1)"><br></span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)"><br>&nbsp;&nbsp;&nbsp;&nbsp;testSpeed();<br>}<br><br></span><span style="color: rgba(0, 0, 255, 1); background-color: rgba(245, 245, 245, 1)">function</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;testSpeed()<br>{<br><br></span><span style="color: rgba(0, 128, 0, 1); background-color: rgba(245, 245, 245, 1)">//</span><span style="color: rgba(0, 128, 0, 1); background-color: rgba(245, 245, 245, 1)">-----------------------------------</span><span style="color: rgba(0, 128, 0, 1); background-color: rgba(245, 245, 245, 1)"><br></span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: rgba(0, 0, 255, 1); background-color: rgba(245, 245, 245, 1)">var</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;ary&nbsp;</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">=</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">[];<br>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: rgba(0, 0, 255, 1); background-color: rgba(245, 245, 245, 1)">for</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">(</span><span style="color: rgba(0, 0, 255, 1); background-color: rgba(245, 245, 245, 1)">var</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;i</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">=</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">0</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">;&nbsp;i</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&lt;</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">10000</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">;&nbsp;i</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">++</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;){<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ary.push(</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">'</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&lt;marker&nbsp;msid="13615532361"&nbsp;lng="104.0447"&nbsp;lat="30.684"&nbsp;status="0"&nbsp;info="川A7G222.&nbsp;&amp;lt;br&amp;gt;&nbsp;力帆体育场店&amp;lt;br&amp;gt;&nbsp;2010-10-27&nbsp;12:54:39&nbsp;"&nbsp;/&gt;</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">'</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">);<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: rgba(0, 0, 255, 1); background-color: rgba(245, 245, 245, 1)">var</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;doc&nbsp;</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">=</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">"</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&lt;current&gt;</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">"</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">+</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;ary.join(</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">""</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">)&nbsp;</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">+</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">"</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&lt;/current&gt;</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">"</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">;<br>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: rgba(0, 0, 255, 1); background-color: rgba(245, 245, 245, 1)">var</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;t0&nbsp;</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">=</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;</span><span style="color: rgba(0, 0, 255, 1); background-color: rgba(245, 245, 245, 1)">new</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;Date();<br>&nbsp;&nbsp;&nbsp;&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: rgba(0, 0, 255, 1); background-color: rgba(245, 245, 245, 1)">var</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;xmlDoc&nbsp;</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">=</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;GXml.parse(doc);<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: rgba(0, 0, 255, 1); background-color: rgba(245, 245, 245, 1)">if</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">(&nbsp;</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">!</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;xmlDoc&nbsp;</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">||</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">!</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;xmlDoc.documentElement)&nbsp;</span><span style="color: rgba(0, 0, 255, 1); background-color: rgba(245, 245, 245, 1)">return</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: rgba(0, 0, 255, 1); background-color: rgba(245, 245, 245, 1)">var</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;markers&nbsp;</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">=</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;xmlDoc.documentElement.getElementsByTagName(</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">"</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">marker</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">"</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">);<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: rgba(0, 0, 255, 1); background-color: rgba(245, 245, 245, 1)">for</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;(</span><span style="color: rgba(0, 0, 255, 1); background-color: rgba(245, 245, 245, 1)">var</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;i&nbsp;</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">=</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">0</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">;&nbsp;i&nbsp;</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&lt;</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;markers.length;&nbsp;i</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">++</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">)&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: rgba(0, 0, 255, 1); background-color: rgba(245, 245, 245, 1)">var</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;lat&nbsp;</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">=</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;parseFloat(markers[i].getAttribute(</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">"</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">lat</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">"</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">));<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: rgba(0, 0, 255, 1); background-color: rgba(245, 245, 245, 1)">var</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;lng&nbsp;</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">=</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;parseFloat(markers[i].getAttribute(</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">"</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">lng</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">"</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">));<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: rgba(0, 0, 255, 1); background-color: rgba(245, 245, 245, 1)">var</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;msid&nbsp;</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">=</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;markers[i].getAttribute(</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">"</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">msid</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">"</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">);<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: rgba(0, 0, 255, 1); background-color: rgba(245, 245, 245, 1)">var</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;status&nbsp;</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">=</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;markers[i].getAttribute(</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">"</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">status</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">"</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">);<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: rgba(0, 0, 255, 1); background-color: rgba(245, 245, 245, 1)">var</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;info&nbsp;</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">=</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;markers[i].getAttribute(</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">"</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">info</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">"</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">);<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br><br>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: rgba(0, 0, 255, 1); background-color: rgba(245, 245, 245, 1)">var</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;t1&nbsp;</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">=</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;</span><span style="color: rgba(0, 0, 255, 1); background-color: rgba(245, 245, 245, 1)">new</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;Date();<br>&nbsp;&nbsp;&nbsp;&nbsp;alert(t1</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">-</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">t0);&nbsp;</span><span style="color: rgba(0, 128, 0, 1); background-color: rgba(245, 245, 245, 1)">//</span><span style="color: rgba(0, 128, 0, 1); background-color: rgba(245, 245, 245, 1)">0.57秒</span><span style="color: rgba(0, 128, 0, 1); background-color: rgba(245, 245, 245, 1)"><br></span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)"><br></span><span style="color: rgba(0, 128, 0, 1); background-color: rgba(245, 245, 245, 1)">//</span><span style="color: rgba(0, 128, 0, 1); background-color: rgba(245, 245, 245, 1)">-----------------------------------</span><span style="color: rgba(0, 128, 0, 1); background-color: rgba(245, 245, 245, 1)"><br></span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: rgba(0, 0, 255, 1); background-color: rgba(245, 245, 245, 1)">var</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;ary&nbsp;</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">=</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">[];<br>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: rgba(0, 0, 255, 1); background-color: rgba(245, 245, 245, 1)">for</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">(</span><span style="color: rgba(0, 0, 255, 1); background-color: rgba(245, 245, 245, 1)">var</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;i</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">=</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">0</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">;&nbsp;i</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&lt;</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">10000</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">;&nbsp;i</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">++</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;){<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ary.push(</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">'</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">["13615532361",104.0447,30.684,0,"川A7G222.&nbsp;&amp;lt;br&amp;gt;&nbsp;力帆体育场店&amp;lt;br&amp;gt;&nbsp;2010-10-27&nbsp;12:54:39"]</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">'</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">);<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: rgba(0, 0, 255, 1); background-color: rgba(245, 245, 245, 1)">var</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;doc&nbsp;</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">=</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">"</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">[</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">"</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">+</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;ary.join(</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">"</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">,</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">"</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">)&nbsp;</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">+</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">"</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">]</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">"</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">;<br>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: rgba(0, 0, 255, 1); background-color: rgba(245, 245, 245, 1)">var</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;t0&nbsp;</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">=</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;</span><span style="color: rgba(0, 0, 255, 1); background-color: rgba(245, 245, 245, 1)">new</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;Date();<br>&nbsp;&nbsp;&nbsp;&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: rgba(0, 0, 255, 1); background-color: rgba(245, 245, 245, 1)">var</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;markers&nbsp;</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">=</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;eval(doc);<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: rgba(0, 0, 255, 1); background-color: rgba(245, 245, 245, 1)">for</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;(</span><span style="color: rgba(0, 0, 255, 1); background-color: rgba(245, 245, 245, 1)">var</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;i&nbsp;</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">=</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">0</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">;&nbsp;i&nbsp;</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&lt;</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;markers.length;&nbsp;i</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">++</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">)&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: rgba(0, 0, 255, 1); background-color: rgba(245, 245, 245, 1)">var</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;lat&nbsp;</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">=</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;parseFloat(markers[i][</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">1</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">]);<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: rgba(0, 0, 255, 1); background-color: rgba(245, 245, 245, 1)">var</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;lng&nbsp;</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">=</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;parseFloat(markers[i][</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">2</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">]);<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: rgba(0, 0, 255, 1); background-color: rgba(245, 245, 245, 1)">var</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;msid&nbsp;</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">=</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;markers[i][</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">0</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">];<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: rgba(0, 0, 255, 1); background-color: rgba(245, 245, 245, 1)">var</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;status&nbsp;</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">=</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;markers[i][</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">3</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">];<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: rgba(0, 0, 255, 1); background-color: rgba(245, 245, 245, 1)">var</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;info&nbsp;</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">=</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;markers[i][</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">4</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">];<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br><br>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: rgba(0, 0, 255, 1); background-color: rgba(245, 245, 245, 1)">var</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;t1&nbsp;</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">=</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;</span><span style="color: rgba(0, 0, 255, 1); background-color: rgba(245, 245, 245, 1)">new</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;Date();<br>&nbsp;&nbsp;&nbsp;&nbsp;alert(t1</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">-</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">t0);&nbsp;</span><span style="color: rgba(0, 128, 0, 1); background-color: rgba(245, 245, 245, 1)">//</span><span style="color: rgba(0, 128, 0, 1); background-color: rgba(245, 245, 245, 1)">0.15秒</span><span style="color: rgba(0, 128, 0, 1); background-color: rgba(245, 245, 245, 1)"><br></span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)"><br></span><span style="color: rgba(0, 128, 0, 1); background-color: rgba(245, 245, 245, 1)">//</span><span style="color: rgba(0, 128, 0, 1); background-color: rgba(245, 245, 245, 1)">-----------------------------------</span><span style="color: rgba(0, 128, 0, 1); background-color: rgba(245, 245, 245, 1)"><br></span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: rgba(0, 0, 255, 1); background-color: rgba(245, 245, 245, 1)">var</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;ary&nbsp;</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">=</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">[];<br>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: rgba(0, 0, 255, 1); background-color: rgba(245, 245, 245, 1)">for</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">(</span><span style="color: rgba(0, 0, 255, 1); background-color: rgba(245, 245, 245, 1)">var</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;i</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">=</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">0</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">;&nbsp;i</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&lt;</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">10000</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">;&nbsp;i</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">++</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;){<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ary.push(</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">'</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">{msid:"13615532361",lng:104.0447,lat:30.684,status:0,info:"川A7G222.&nbsp;&amp;lt;br&amp;gt;&nbsp;力帆体育场店&amp;lt;br&amp;gt;&nbsp;2010-10-27&nbsp;12:54:39"}</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">'</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">);<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: rgba(0, 0, 255, 1); background-color: rgba(245, 245, 245, 1)">var</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;doc&nbsp;</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">=</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">"</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">[</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">"</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">+</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;ary.join(</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">"</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">,</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">"</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">)&nbsp;</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">+</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">"</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">]</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">"</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">;<br>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: rgba(0, 0, 255, 1); background-color: rgba(245, 245, 245, 1)">var</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;t0&nbsp;</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">=</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;</span><span style="color: rgba(0, 0, 255, 1); background-color: rgba(245, 245, 245, 1)">new</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;Date();<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: rgba(0, 0, 255, 1); background-color: rgba(245, 245, 245, 1)">var</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;markers&nbsp;</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">=</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;eval(doc);<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: rgba(0, 0, 255, 1); background-color: rgba(245, 245, 245, 1)">for</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;(</span><span style="color: rgba(0, 0, 255, 1); background-color: rgba(245, 245, 245, 1)">var</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;i&nbsp;</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">=</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">0</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">;&nbsp;i&nbsp;</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&lt;</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;markers.length;&nbsp;i</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">++</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">)&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: rgba(0, 128, 0, 1); background-color: rgba(245, 245, 245, 1)">//</span><span style="color: rgba(0, 128, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;obtain&nbsp;the&nbsp;attribues&nbsp;of&nbsp;each&nbsp;marker</span><span style="color: rgba(0, 128, 0, 1); background-color: rgba(245, 245, 245, 1)"><br></span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: rgba(0, 0, 255, 1); background-color: rgba(245, 245, 245, 1)">var</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;lat&nbsp;</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">=</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;parseFloat(markers[i].lat);<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: rgba(0, 0, 255, 1); background-color: rgba(245, 245, 245, 1)">var</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;lng&nbsp;</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">=</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;parseFloat(markers[i].lng);<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: rgba(0, 0, 255, 1); background-color: rgba(245, 245, 245, 1)">var</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;msid&nbsp;</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">=</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;markers[i].msid;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: rgba(0, 0, 255, 1); background-color: rgba(245, 245, 245, 1)">var</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;status&nbsp;</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">=</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;markers[i].status;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: rgba(0, 0, 255, 1); background-color: rgba(245, 245, 245, 1)">var</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;info&nbsp;</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">=</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;markers[i].info;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br><br>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: rgba(0, 0, 255, 1); background-color: rgba(245, 245, 245, 1)">var</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;t1&nbsp;</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">=</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;</span><span style="color: rgba(0, 0, 255, 1); background-color: rgba(245, 245, 245, 1)">new</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">&nbsp;Date();<br>&nbsp;&nbsp;&nbsp;&nbsp;alert(t1</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">-</span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)">t0);&nbsp;</span><span style="color: rgba(0, 128, 0, 1); background-color: rgba(245, 245, 245, 1)">//</span><span style="color: rgba(0, 128, 0, 1); background-color: rgba(245, 245, 245, 1)">0.15秒</span><span style="color: rgba(0, 128, 0, 1); background-color: rgba(245, 245, 245, 1)"><br></span><span style="color: rgba(0, 0, 0, 1); background-color: rgba(245, 245, 245, 1)"><br>}<br><br>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: rgba(0, 0, 255, 1)">&lt;/</span><span style="color: rgba(128, 0, 0, 1)">script</span><span style="color: rgba(0, 0, 255, 1)">&gt;</span><span style="color: rgba(0, 0, 0, 1)"><br>&nbsp;&nbsp;</span><span style="color: rgba(0, 0, 255, 1)">&lt;/</span><span style="color: rgba(128, 0, 0, 1)">head</span><span style="color: rgba(0, 0, 255, 1)">&gt;</span><span style="color: rgba(0, 0, 0, 1)"><br>&nbsp;&nbsp;</span><span style="color: rgba(0, 0, 255, 1)">&lt;</span><span style="color: rgba(128, 0, 0, 1)">body&nbsp;</span><span style="color: rgba(255, 0, 0, 1)">onload</span><span style="color: rgba(0, 0, 255, 1)">="initialize()"</span><span style="color: rgba(255, 0, 0, 1)">&nbsp;onunload</span><span style="color: rgba(0, 0, 255, 1)">="GUnload()"</span><span style="color: rgba(0, 0, 255, 1)">&gt;</span><span style="color: rgba(0, 0, 0, 1)"><br>&nbsp;&nbsp;&nbsp;&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: rgba(0, 0, 255, 1)">&lt;</span><span style="color: rgba(128, 0, 0, 1)">div&nbsp;</span><span style="color: rgba(255, 0, 0, 1)">id</span><span style="color: rgba(0, 0, 255, 1)">="map_canvas"</span><span style="color: rgba(255, 0, 0, 1)">&nbsp;style</span><span style="color: rgba(0, 0, 255, 1)">="width:&nbsp;800px;&nbsp;height:&nbsp;600px"</span><span style="color: rgba(0, 0, 255, 1)">&gt;&lt;/</span><span style="color: rgba(128, 0, 0, 1)">div</span><span style="color: rgba(0, 0, 255, 1)">&gt;</span><span style="color: rgba(0, 0, 0, 1)"><br><br><br>&nbsp;&nbsp;</span><span style="color: rgba(0, 0, 255, 1)">&lt;/</span><span style="color: rgba(128, 0, 0, 1)">body</span><span style="color: rgba(0, 0, 255, 1)">&gt;</span><span style="color: rgba(0, 0, 0, 1)"><br></span><span style="color: rgba(0, 0, 255, 1)">&lt;/</span><span style="color: rgba(128, 0, 0, 1)">html</span><span style="color: rgba(0, 0, 255, 1)">&gt;</span></div></div></div>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
         </div>
-        <div id="sideleft">
-    <div id="guide" style="display:none;">
-        <h3>
-            <a href="//www.cnblogs.com" title="程序员的网上家园">博客园</a> » <a href="/" title="IT新闻">新闻</a><span id="lbMobileAuditTips" style="display:none;"></span>
-        </h3>
+        <p class="postfoot">
+            posted on 
+<span id="post-date">2010-11-02 17:43</span>&nbsp;
+<a href="https://www.cnblogs.com/dstang2000/">拓荒者</a>&nbsp;
+阅读(<span id="post_view_count">966</span>)&nbsp;
+评论(<span id="post_comment_count">0</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=1867406" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(1867406);return false;">收藏</a>
+        </p>
     </div>
-    <div id="navcontainer" class="floatright" style="padding-top: 1px;">
-        <ul id="navlist">
-            <li>
-                <a href="/" class="current">最新发布</a>
-            </li>
-            <li>
-                <a href="/n/recommend">推荐新闻</a>
-            </li>
-            <li>
-                <a href="/n/digg">热门新闻</a>
-            </li>
-            <li>
-                <a href="/n/comment">新闻评论</a>
-            </li>
-        </ul>
+</div>
+
+<script src="https://common.cnblogs.com/highlight/10.3.1/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 9986, cb_blogApp = 'dstang2000', cb_blogUserGuid = 'd796310b-63cf-dd11-9e4d-001cf0cd104b';
+    var cb_entryId = 1867406, cb_entryCreatedDate = '2010-11-02 17:43', cb_postType = 1;
+    updatePostStats(
+        [cb_entryId],
+        function(id, count) { $("#post_view_count").text(count) },
+        function(id, count) { $("#post_comment_count").text(count) })
+    zoomManager.apply("#cnblogs_post_body img:not(.code_img_closed):not(.code_img_opened)");
+</script>
+<a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <div id="cnblogs_c1" class="under-post-card">
+        <div id='div-gpt-ad-1592365906576-0' style='width: 300px; height: 250px;'></div>
     </div>
-    <div class="clear">
+    <div id="under_post_card1"></div>
+    <div id="cnblogs_c2" class="under-post-card">
+        <div id='div-gpt-ad-1592366332455-0' style='width: 468px; height: 60px;'></div>
     </div>
-    <div id="news_list">
-            <div class="news_block" id="entry_691529">
-                <div class="action">
-                    <div class="diggit" onclick="VoteNews(691529,'agree')">
-                        <span id="digg_num_691529" class="diggnum">0</span>
-                    </div>
-                    <div class="clear"></div>
-                    <div id="digg_tip_691529" class="digg-tip"></div>
-                </div>
-                <!--end: action -->
-                <div class="content">
-                    <h2 class="news_entry">
-                        <a href="/n/691529/" target="_blank">与消费者、合作伙伴、监管摩擦不断，特斯拉为何在中国成了“碰碰车”</a>
-                    </h2>
-                    <div class="entry_summary" style="display: block;">
-                        <a href="/n/topic_429.htm"><img src="https://img2020.cnblogs.com/news_topic/20200919095456914-256019808.png" class="topic_img" alt=""/></a>
-                        腾讯新闻《潜望》唐媛媛 正如特斯拉中国区掌门人朱晓彤此前所言“报道我们的技术、产品和愿景能给你们带来最大的流量和关注度”，几乎特斯拉的每一条新闻都能够成为热点事件。 然而事与愿违的是，这带来更大流量与关注度的往往是“技术、产品、愿景”背后所隐藏的潜在的产品缺陷和在消费者看来这家美国公司对待消费者的傲
-                    </div>
-                    <div class="entry_footer">
-                        <a href="//home.cnblogs.com/u/itwriter/" class="gray" target="_blank">
-                            itwriter
-                        </a>投递&nbsp;
-                        <span class="comment">
-                            <a href="/n/691529#comment" class="gray" target="_blank">评论(0)</a>
-                        </span><span class="view">0 人浏览</span>
-                        <span class="tag"> <a href="/n/tag/Tesla/" class="gray">Tesla</a> </span>
-                        发布于 <span class="gray">2021-04-23 08:08</span>
-                    </div>
-                    <!--end: entry_footer -->
-                </div>
-                <!--end: content -->
-                <div class="clear">
-                </div>
-            </div>
-            <!--end: news_block -->
-            <div class="clear">
-            </div>
-            <div class="news_block" id="entry_691528">
-                <div class="action">
-                    <div class="diggit" onclick="VoteNews(691528,'agree')">
-                        <span id="digg_num_691528" class="diggnum">0</span>
-                    </div>
-                    <div class="clear"></div>
-                    <div id="digg_tip_691528" class="digg-tip"></div>
-                </div>
-                <!--end: action -->
-                <div class="content">
-                    <h2 class="news_entry">
-                        <a href="/n/691528/" target="_blank">苹果高管再次重申：无计划合并iPad与Mac两大产品</a>
-                    </h2>
-                    <div class="entry_summary" style="display: block;">
-                        <a href="/n/topic_82.htm"><img src="https://img2018.cnblogs.com/news_topic/20190822140314801-1842879152.png" class="topic_img" alt=""/></a>
-                        腾讯科技讯，4 月 23 日消息，苹果全球营销副总裁格雷格&#183;乔斯维克（Greg Joswiak）周三表示，尽管最新发布的 iPad Pro 像 Mac 一样采用了 M1 处理器，但是苹果并没有合并 iPad 和 Mac 两项业务的计划。 自苹果 2010 年发布第一代 iPad 以来，人们就一直在担
-                    </div>
-                    <div class="entry_footer">
-                        <a href="//home.cnblogs.com/u/itwriter/" class="gray" target="_blank">
-                            itwriter
-                        </a>投递&nbsp;
-                        <span class="comment">
-                            <a href="/n/691528#comment" class="gray" target="_blank">评论(0)</a>
-                        </span><span class="view">18 人浏览</span>
-                        <span class="tag"> <a href="/n/tag/%E8%8B%B9%E6%9E%9C/" class="gray">苹果</a> </span>
-                        发布于 <span class="gray">2021-04-23 08:00</span>
-                    </div>
-                    <!--end: entry_footer -->
-                </div>
-                <!--end: content -->
-                <div class="clear">
-                </div>
-            </div>
-            <!--end: news_block -->
-            <div class="clear">
-            </div>
-            <div class="news_block" id="entry_691526">
-                <div class="action">
-                    <div class="diggit" onclick="VoteNews(691526,'agree')">
-                        <span id="digg_num_691526" class="diggnum">0</span>
-                    </div>
-                    <div class="clear"></div>
-                    <div id="digg_tip_691526" class="digg-tip"></div>
-                </div>
-                <!--end: action -->
-                <div class="content">
-                    <h2 class="news_entry">
-                        <a href="/n/691526/" target="_blank">快手、抖音、微信视频号三国争霸，究竟鹿死谁家？</a>
-                    </h2>
-                    <div class="entry_summary" style="display: block;">
-                        <a href="/n/topic_793.htm"><img src="//images2015.cnblogs.com/news_topic/20161222123753807-514279725.png" class="topic_img" alt=""/></a>
-                        文/何加盐 来源/何加盐（ID：ihejiayan） 不知不觉，手机已经占领了我们的生活，成为占有人们每天空闲时间最长的工具；而短视频则已经占领了我们的手机，成为占据手机使用时间最多的领域。 每天，我们有将近四分之一的生命花在手机上；这四分之一里面，又有超过四分之一花在短视频上。（数据来源：极光 i
-                    </div>
-                    <div class="entry_footer">
-                        <a href="//home.cnblogs.com/u/itwriter/" class="gray" target="_blank">
-                            itwriter
-                        </a>投递&nbsp;
-                        <span class="comment">
-                            <a href="/n/691526#comment" class="gray" target="_blank">评论(0)</a>
-                        </span><span class="view">220 人浏览</span>
-                        <span class="tag"> <a href="/n/tag/%E5%BF%AB%E6%89%8B/" class="gray">快手</a> <a href="/n/tag/%E6%8A%96%E9%9F%B3/" class="gray">抖音</a> <a href="/n/tag/%E5%BE%AE%E4%BF%A1/" class="gray">微信</a> </span>
-                        发布于 <span class="gray">2021-04-23 00:32</span>
-                    </div>
-                    <!--end: entry_footer -->
-                </div>
-                <!--end: content -->
-                <div class="clear">
-                </div>
-            </div>
-            <!--end: news_block -->
-            <div class="clear">
-            </div>
-            <div class="news_block" id="entry_691524">
-                <div class="action">
-                    <div class="diggit" onclick="VoteNews(691524,'agree')">
-                        <span id="digg_num_691524" class="diggnum">1</span>
-                    </div>
-                    <div class="clear"></div>
-                    <div id="digg_tip_691524" class="digg-tip"></div>
-                </div>
-                <!--end: action -->
-                <div class="content">
-                    <h2 class="news_entry">
-                        <a href="/n/691524/" target="_blank">特斯拉不愿低头不要紧，太多人在等着接替它的位置</a>
-                    </h2>
-                    <div class="entry_summary" style="display: block;">
-                        <a href="/n/topic_429.htm"><img src="https://img2020.cnblogs.com/news_topic/20200919095456914-256019808.png" class="topic_img" alt=""/></a>
-                        文/小互 来源：互联网的那点事（ID：alibuy） 傲慢行不通，至少在中国不行 4 月 20 日，北京时间的深夜，特斯拉终于道歉了。 但它的道歉稿，以及发文的时间，明里暗里都透露着那么一丝不情不愿，避重就轻。 前一阵子，好好的一场车展，因为维权的特斯拉车主，活活办成了3&#183;15。 3&#183;15 放过了特
-                    </div>
-                    <div class="entry_footer">
-                        <a href="//home.cnblogs.com/u/itwriter/" class="gray" target="_blank">
-                            itwriter
-                        </a>投递&nbsp;
-                        <span class="comment">
-                            <a href="/n/691524#comment" class="gray" target="_blank">评论(0)</a>
-                        </span><span class="view">281 人浏览</span>
-                        <span class="tag"> <a href="/n/tag/Tesla/" class="gray">Tesla</a> </span>
-                        发布于 <span class="gray">2021-04-23 00:24</span>
-                    </div>
-                    <!--end: entry_footer -->
-                </div>
-                <!--end: content -->
-                <div class="clear">
-                </div>
-            </div>
-            <!--end: news_block -->
-            <div class="clear">
-            </div>
-            <div class="news_block" id="entry_691521">
-                <div class="action">
-                    <div class="diggit" onclick="VoteNews(691521,'agree')">
-                        <span id="digg_num_691521" class="diggnum">0</span>
-                    </div>
-                    <div class="clear"></div>
-                    <div id="digg_tip_691521" class="digg-tip"></div>
-                </div>
-                <!--end: action -->
-                <div class="content">
-                    <h2 class="news_entry">
-                        <a href="/n/691521/" target="_blank">跟谁学宣布更名为“高途集团”  称品牌体验更清晰</a>
-                    </h2>
-                    <div class="entry_summary" style="display: block;">
-                        <a href="/n/topic_2655.htm"><img src="https://img2018.cnblogs.com/news_topic/20200226125108922-626099503.png" class="topic_img" alt=""/></a>
-                        4 月 22 日消息，美股上市在线教育公司跟谁学（NYSE:GSX）宣布，即日起将公司名称统一更名为“高途集团”。公司统一更名为“高途集团”后，原 K12 业务保持不变，仍为“高途课堂”，原跟谁学成人业务更名为“高途学院”。 据高途集团相关人员介绍，此次公司将“高途”作为统一的公司品牌，可以给予学生
-                    </div>
-                    <div class="entry_footer">
-                        <a href="//home.cnblogs.com/u/itwriter/" class="gray" target="_blank">
-                            itwriter
-                        </a>投递&nbsp;
-                        <span class="comment">
-                            <a href="/n/691521#comment" class="gray" target="_blank">评论(0)</a>
-                        </span><span class="view">72 人浏览</span>
-                        <span class="tag"> <a href="/n/tag/%E8%B7%9F%E8%B0%81%E5%AD%A6/" class="gray">跟谁学</a> </span>
-                        发布于 <span class="gray">2021-04-23 00:14</span>
-                    </div>
-                    <!--end: entry_footer -->
-                </div>
-                <!--end: content -->
-                <div class="clear">
-                </div>
-            </div>
-            <!--end: news_block -->
-            <div class="clear">
-            </div>
-            <div class="news_block" id="entry_691522">
-                <div class="action">
-                    <div class="diggit" onclick="VoteNews(691522,'agree')">
-                        <span id="digg_num_691522" class="diggnum">0</span>
-                    </div>
-                    <div class="clear"></div>
-                    <div id="digg_tip_691522" class="digg-tip"></div>
-                </div>
-                <!--end: action -->
-                <div class="content">
-                    <h2 class="news_entry">
-                        <a href="/n/691522/" target="_blank">李想：理想自研自动驾驶 明年可与华为、特斯拉正面较量</a>
-                    </h2>
-                    <div class="entry_summary" style="display: block;">
-                        <a href="/n/topic_2658.htm"><img src="https://img2020.cnblogs.com/news_topic/20200519081225487-510553435.png" class="topic_img" alt=""/></a>
-                        理想 ONE 虽然是一辆增程式电动车，但是在国内也受到了众多消费者的认可，并且仅靠着一辆理想 ONE 主场作战，理想 ONE 的销量就突破了 4 万辆，与蔚来和小鹏相比，理想同样成绩斐然。 此外，与蔚来相比，在电动电池和驱动电机方面的研发，理想并没有表现出明显的较量意图，理想更注重于消费者的体验方面
-                    </div>
-                    <div class="entry_footer">
-                        <a href="//home.cnblogs.com/u/itwriter/" class="gray" target="_blank">
-                            itwriter
-                        </a>投递&nbsp;
-                        <span class="comment">
-                            <a href="/n/691522#comment" class="gray" target="_blank">评论(0)</a>
-                        </span><span class="view">112 人浏览</span>
-                        <span class="tag"> <a href="/n/tag/%E7%90%86%E6%83%B3%E6%B1%BD%E8%BD%A6/" class="gray">理想汽车</a> </span>
-                        发布于 <span class="gray">2021-04-23 00:12</span>
-                    </div>
-                    <!--end: entry_footer -->
-                </div>
-                <!--end: content -->
-                <div class="clear">
-                </div>
-            </div>
-            <!--end: news_block -->
-            <div class="clear">
-            </div>
-            <div class="news_block" id="entry_691518">
-                <div class="action">
-                    <div class="diggit" onclick="VoteNews(691518,'agree')">
-                        <span id="digg_num_691518" class="diggnum">5</span>
-                    </div>
-                    <div class="clear"></div>
-                    <div id="digg_tip_691518" class="digg-tip"></div>
-                </div>
-                <!--end: action -->
-                <div class="content">
-                    <h2 class="news_entry">
-                        <a href="/n/691518/" target="_blank">特斯拉：已快递发出48页事故数据，愿意在权威检测机构检测</a>
-                    </h2>
-                    <div class="entry_summary" style="display: block;">
-                        <a href="/n/topic_429.htm"><img src="https://img2020.cnblogs.com/news_topic/20200919095456914-256019808.png" class="topic_img" alt=""/></a>
-                        划重点 通过电话和短信联系张女士丈夫多次，但未得到回复。 事故前半小时完整行车数据共计 48 页、6697 条，已快递、电邮发给张女士。 将毫无保留地配合监管部门开展深入调查，开诚布公接受社会监督。 愿意在客户同意、政府指定或监督的情况下，三方共同见证，在全国范围内任意有资质的权威检测机构进行检测。
-                    </div>
-                    <div class="entry_footer">
-                        <a href="//home.cnblogs.com/u/itwriter/" class="gray" target="_blank">
-                            itwriter
-                        </a>投递&nbsp;
-                        <span class="comment">
-                            <a href="/n/691518#comment" class="gray" target="_blank">评论(0)</a>
-                        </span><span class="view">229 人浏览</span>
-                        <span class="tag"> <a href="/n/tag/Tesla/" class="gray">Tesla</a> </span>
-                        发布于 <span class="gray">2021-04-22 23:32</span>
-                    </div>
-                    <!--end: entry_footer -->
-                </div>
-                <!--end: content -->
-                <div class="clear">
-                </div>
-            </div>
-            <!--end: news_block -->
-            <div class="clear">
-            </div>
-            <div class="news_block" id="entry_691520">
-                <div class="action">
-                    <div class="diggit" onclick="VoteNews(691520,'agree')">
-                        <span id="digg_num_691520" class="diggnum">0</span>
-                    </div>
-                    <div class="clear"></div>
-                    <div id="digg_tip_691520" class="digg-tip"></div>
-                </div>
-                <!--end: action -->
-                <div class="content">
-                    <h2 class="news_entry">
-                        <a href="/n/691520/" target="_blank">平安好医生与华润三九合作  开发定制化电子云药箱</a>
-                    </h2>
-                    <div class="entry_summary" style="display: block;">
-                        <a href="/n/topic_728.htm"><img src="//images2015.cnblogs.com/news_topic/20160713154051264-475946137.png" class="topic_img" alt=""/></a>
-                        4 月 20 日，平安好医生协同平安健康保险，与华润三九医药股份有限公司达成战略合作。 华润三九主要从事医药产品的研发、生产、销售及相关健康服务。其健康产品覆盖领域广，产品线丰富，999 感冒灵颗粒/胶囊连续多年荣获感冒咳嗽类第一名。通过与华润三九合作，用户可通过平安健康 APP 直接享受到 999
-                    </div>
-                    <div class="entry_footer">
-                        <a href="//home.cnblogs.com/u/itwriter/" class="gray" target="_blank">
-                            itwriter
-                        </a>投递&nbsp;
-                        <span class="comment">
-                            <a href="/n/691520#comment" class="gray" target="_blank">评论(0)</a>
-                        </span><span class="view">32 人浏览</span>
-                        <span class="tag"> <a href="/n/tag/%E5%B9%B3%E5%AE%89%E5%A5%BD%E5%8C%BB%E7%94%9F/" class="gray">平安好医生</a> </span>
-                        发布于 <span class="gray">2021-04-22 23:25</span>
-                    </div>
-                    <!--end: entry_footer -->
-                </div>
-                <!--end: content -->
-                <div class="clear">
-                </div>
-            </div>
-            <!--end: news_block -->
-            <div class="clear">
-            </div>
-            <div class="news_block" id="entry_691519">
-                <div class="action">
-                    <div class="diggit" onclick="VoteNews(691519,'agree')">
-                        <span id="digg_num_691519" class="diggnum">0</span>
-                    </div>
-                    <div class="clear"></div>
-                    <div id="digg_tip_691519" class="digg-tip"></div>
-                </div>
-                <!--end: action -->
-                <div class="content">
-                    <h2 class="news_entry">
-                        <a href="/n/691519/" target="_blank">realme发布新品真我Q3：售价999元起</a>
-                    </h2>
-                    <div class="entry_summary" style="display: block;">
-                        <a href="/n/topic_1401.htm"><img src="https://img2018.cnblogs.com/news_topic/20190905170126353-2059792830.jpg" class="topic_img" alt=""/></a>
-                        4 月 22 日晚间消息，realme 今天线上发布了真我 Q3 新品系列，三档产品，售价 999 元起。 发布会上，realme 副总裁、中国区总裁、全球营销总裁徐起表示，realme 电商平台粉丝数突破了 2000 万，真我 GT Neo 首销当日 10 秒销售额实现破亿、9 小时全渠道销量超 
-                    </div>
-                    <div class="entry_footer">
-                        <a href="//home.cnblogs.com/u/itwriter/" class="gray" target="_blank">
-                            itwriter
-                        </a>投递&nbsp;
-                        <span class="comment">
-                            <a href="/n/691519#comment" class="gray" target="_blank">评论(0)</a>
-                        </span><span class="view">133 人浏览</span>
-                        <span class="tag"> <a href="/n/tag/realme/" class="gray">realme</a> </span>
-                        发布于 <span class="gray">2021-04-22 23:20</span>
-                    </div>
-                    <!--end: entry_footer -->
-                </div>
-                <!--end: content -->
-                <div class="clear">
-                </div>
-            </div>
-            <!--end: news_block -->
-            <div class="clear">
-            </div>
-            <div class="news_block" id="entry_691517">
-                <div class="action">
-                    <div class="diggit" onclick="VoteNews(691517,'agree')">
-                        <span id="digg_num_691517" class="diggnum">0</span>
-                    </div>
-                    <div class="clear"></div>
-                    <div id="digg_tip_691517" class="digg-tip"></div>
-                </div>
-                <!--end: action -->
-                <div class="content">
-                    <h2 class="news_entry">
-                        <a href="/n/691517/" target="_blank">台积电董事会批准28亿美元增加芯片产能计划</a>
-                    </h2>
-                    <div class="entry_summary" style="display: block;">
-                        <a href="/n/topic_696.htm"><img src="https://img2018.cnblogs.com/news_topic/20190827152424015-808154993.png" class="topic_img" alt=""/></a>
-                        腾讯科技讯，4 月 22 日消息，全球最大代工芯片制造商台积电周四证实，该公司董事会已批准 28.9 亿美元支出以增加芯片产能计划。此举被视为对全球芯片供应短缺的回应，缺芯危机对汽车制造商的影响尤其严重。 在一份简短的声明中，台积电表示，其董事会已批准这笔支出，“目的是上马成熟制程工艺产能”。不过，
-                    </div>
-                    <div class="entry_footer">
-                        <a href="//home.cnblogs.com/u/itwriter/" class="gray" target="_blank">
-                            itwriter
-                        </a>投递&nbsp;
-                        <span class="comment">
-                            <a href="/n/691517#comment" class="gray" target="_blank">评论(0)</a>
-                        </span><span class="view">66 人浏览</span>
-                        <span class="tag"> <a href="/n/tag/%E5%8F%B0%E7%A7%AF%E7%94%B5/" class="gray">台积电</a> </span>
-                        发布于 <span class="gray">2021-04-22 23:17</span>
-                    </div>
-                    <!--end: entry_footer -->
-                </div>
-                <!--end: content -->
-                <div class="clear">
-                </div>
-            </div>
-            <!--end: news_block -->
-            <div class="clear">
-            </div>
-            <div class="news_block" id="entry_691516">
-                <div class="action">
-                    <div class="diggit" onclick="VoteNews(691516,'agree')">
-                        <span id="digg_num_691516" class="diggnum">0</span>
-                    </div>
-                    <div class="clear"></div>
-                    <div id="digg_tip_691516" class="digg-tip"></div>
-                </div>
-                <!--end: action -->
-                <div class="content">
-                    <h2 class="news_entry">
-                        <a href="/n/691516/" target="_blank">顺丰控股：一季度净亏损9.89亿元 财务负责人伍玮婷调任</a>
-                    </h2>
-                    <div class="entry_summary" style="display: block;">
-                        <a href="/n/topic_528.htm"><img src="//images0.cnblogs.com/news_topic/20150323122850630.png" class="topic_img" alt=""/></a>
-                        腾讯科技讯，4 月 22 日，顺丰控股发布业绩公告，一季度净亏损 9.89 亿元，上年同期盈利 9.07 亿元。公司董事会于近日收到财务负责人伍玮婷女士提交的工作调任通知。伍玮婷女士因个人原因，申请自 2021 年 4 月 24 日起辞去公司董事会审计委员会委员、财务负责人、副总经理职务。 顺丰财报
-                    </div>
-                    <div class="entry_footer">
-                        <a href="//home.cnblogs.com/u/itwriter/" class="gray" target="_blank">
-                            itwriter
-                        </a>投递&nbsp;
-                        <span class="comment">
-                            <a href="/n/691516#comment" class="gray" target="_blank">评论(0)</a>
-                        </span><span class="view">96 人浏览</span>
-                        <span class="tag"> <a href="/n/tag/%E9%A1%BA%E4%B8%B0/" class="gray">顺丰</a> </span>
-                        发布于 <span class="gray">2021-04-22 23:11</span>
-                    </div>
-                    <!--end: entry_footer -->
-                </div>
-                <!--end: content -->
-                <div class="clear">
-                </div>
-            </div>
-            <!--end: news_block -->
-            <div class="clear">
-            </div>
-            <div class="news_block" id="entry_691515">
-                <div class="action">
-                    <div class="diggit" onclick="VoteNews(691515,'agree')">
-                        <span id="digg_num_691515" class="diggnum">0</span>
-                    </div>
-                    <div class="clear"></div>
-                    <div id="digg_tip_691515" class="digg-tip"></div>
-                </div>
-                <!--end: action -->
-                <div class="content">
-                    <h2 class="news_entry">
-                        <a href="/n/691515/" target="_blank">消息称苹果准备对其移动软件进行重大改进，包括通知和主屏设计</a>
-                    </h2>
-                    <div class="entry_summary" style="display: block;">
-                        <a href="/n/topic_82.htm"><img src="https://img2018.cnblogs.com/news_topic/20190822140314801-1842879152.png" class="topic_img" alt=""/></a>
-                        腾讯科技讯，4 月 22 日消息，据知情人士透露，苹果正在准备对其移动软件进行重大改进，包括升级用户处理通知的方式，重新设计 iPad 主屏幕，更新锁屏，并为其旗舰设备提供额外的隐私保护。 正在开发中的更新计划包括在 iOS 15 和 iPadOS 15 中，这是即将为 iPhone 和 iPad 
-                    </div>
-                    <div class="entry_footer">
-                        <a href="//home.cnblogs.com/u/itwriter/" class="gray" target="_blank">
-                            itwriter
-                        </a>投递&nbsp;
-                        <span class="comment">
-                            <a href="/n/691515#comment" class="gray" target="_blank">评论(0)</a>
-                        </span><span class="view">67 人浏览</span>
-                        <span class="tag"> <a href="/n/tag/%E8%8B%B9%E6%9E%9C/" class="gray">苹果</a> </span>
-                        发布于 <span class="gray">2021-04-22 23:08</span>
-                    </div>
-                    <!--end: entry_footer -->
-                </div>
-                <!--end: content -->
-                <div class="clear">
-                </div>
-            </div>
-            <!--end: news_block -->
-            <div class="clear">
-            </div>
-            <div class="news_block" id="entry_691514">
-                <div class="action">
-                    <div class="diggit" onclick="VoteNews(691514,'agree')">
-                        <span id="digg_num_691514" class="diggnum">0</span>
-                    </div>
-                    <div class="clear"></div>
-                    <div id="digg_tip_691514" class="digg-tip"></div>
-                </div>
-                <!--end: action -->
-                <div class="content">
-                    <h2 class="news_entry">
-                        <a href="/n/691514/" target="_blank">好未来2021财年净收入44.958亿美元 同比增长37.3%</a>
-                    </h2>
-                    <div class="entry_summary" style="display: block;">
-                        <a href="/n/topic_511.htm"><img src="//images0.cnblogs.com/news_topic/20150128173520347.png" class="topic_img" alt=""/></a>
-                        腾讯科技讯，4 月 22 日消息，好未来公布其截至 2021 年 2 月 28 日的 2021 财年第四季度和全年未经审计财务报告。 2021 财年第四季度业绩摘要 -净收入从上年同期的 8.577 亿美元增长到本季的 13.627 亿美元，同比增幅为 58.9%。 -经营亏损为 2.972 亿美元
-                    </div>
-                    <div class="entry_footer">
-                        <a href="//home.cnblogs.com/u/itwriter/" class="gray" target="_blank">
-                            itwriter
-                        </a>投递&nbsp;
-                        <span class="comment">
-                            <a href="/n/691514#comment" class="gray" target="_blank">评论(0)</a>
-                        </span><span class="view">22 人浏览</span>
-                        <span class="tag"> <a href="/n/tag/%E5%A5%BD%E6%9C%AA%E6%9D%A5/" class="gray">好未来</a> </span>
-                        发布于 <span class="gray">2021-04-22 23:03</span>
-                    </div>
-                    <!--end: entry_footer -->
-                </div>
-                <!--end: content -->
-                <div class="clear">
-                </div>
-            </div>
-            <!--end: news_block -->
-            <div class="clear">
-            </div>
-            <div class="news_block" id="entry_691513">
-                <div class="action">
-                    <div class="diggit" onclick="VoteNews(691513,'agree')">
-                        <span id="digg_num_691513" class="diggnum">0</span>
-                    </div>
-                    <div class="clear"></div>
-                    <div id="digg_tip_691513" class="digg-tip"></div>
-                </div>
-                <!--end: action -->
-                <div class="content">
-                    <h2 class="news_entry">
-                        <a href="/n/691513/" target="_blank">腾讯发布全球纪录片《零水日》</a>
-                    </h2>
-                    <div class="entry_summary" style="display: block;">
-                        <a href="/n/topic_7.htm"><img src="https://img2020.cnblogs.com/news_topic/20200706085628246-1266015956.gif" class="topic_img" alt=""/></a>
-                        4 月 22 日，在庆祝第 52 个世界地球日之际，由腾讯集团、腾讯影业出品、腾讯视频独家首播的纪录片《零水日》(DAY ZERO)在全球 4 大洲 10 余个国家上线播出。该纪录片讲述了南美洲巴西、非洲南非、北美洲美国以及亚洲中国四个国家的水资源挑战。本周一，腾讯刚刚宣布启动战略升级，将“可持续社
-                    </div>
-                    <div class="entry_footer">
-                        <a href="//home.cnblogs.com/u/itwriter/" class="gray" target="_blank">
-                            itwriter
-                        </a>投递&nbsp;
-                        <span class="comment">
-                            <a href="/n/691513#comment" class="gray" target="_blank">评论(0)</a>
-                        </span><span class="view">91 人浏览</span>
-                        <span class="tag"> <a href="/n/tag/%E8%85%BE%E8%AE%AF/" class="gray">腾讯</a> </span>
-                        发布于 <span class="gray">2021-04-22 23:00</span>
-                    </div>
-                    <!--end: entry_footer -->
-                </div>
-                <!--end: content -->
-                <div class="clear">
-                </div>
-            </div>
-            <!--end: news_block -->
-            <div class="clear">
-            </div>
-            <div class="news_block" id="entry_691512">
-                <div class="action">
-                    <div class="diggit" onclick="VoteNews(691512,'agree')">
-                        <span id="digg_num_691512" class="diggnum">0</span>
-                    </div>
-                    <div class="clear"></div>
-                    <div id="digg_tip_691512" class="digg-tip"></div>
-                </div>
-                <!--end: action -->
-                <div class="content">
-                    <h2 class="news_entry">
-                        <a href="/n/691512/" target="_blank">特斯拉维权风波背后，原来是一场战争</a>
-                    </h2>
-                    <div class="entry_summary" style="display: block;">
-                        <a href="/n/topic_429.htm"><img src="https://img2020.cnblogs.com/news_topic/20200919095456914-256019808.png" class="topic_img" alt=""/></a>
-                        文/关不羽 来源：冰川思享号（ID：icereview） 特斯拉也好，整个电动车行业也罢，对事故调查环节的“数据之争”，理应寻求制度化、程序化的解决方式，争取实现数据安全的同时赢得公信力。 上海车展的维权风波以特斯拉道歉告一段落。然而，一个“数据争夺战”的时代才刚刚开始。 01 几乎与中国维权风波的
-                    </div>
-                    <div class="entry_footer">
-                        <a href="//home.cnblogs.com/u/itwriter/" class="gray" target="_blank">
-                            itwriter
-                        </a>投递&nbsp;
-                        <span class="comment">
-                            <a href="/n/691512#comment" class="gray" target="_blank">评论(0)</a>
-                        </span><span class="view">108 人浏览</span>
-                        <span class="tag"> <a href="/n/tag/Tesla/" class="gray">Tesla</a> </span>
-                        发布于 <span class="gray">2021-04-22 22:12</span>
-                    </div>
-                    <!--end: entry_footer -->
-                </div>
-                <!--end: content -->
-                <div class="clear">
-                </div>
-            </div>
-            <!--end: news_block -->
-            <div class="clear">
-            </div>
-            <div class="news_block" id="entry_691511">
-                <div class="action">
-                    <div class="diggit" onclick="VoteNews(691511,'agree')">
-                        <span id="digg_num_691511" class="diggnum">0</span>
-                    </div>
-                    <div class="clear"></div>
-                    <div id="digg_tip_691511" class="digg-tip"></div>
-                </div>
-                <!--end: action -->
-                <div class="content">
-                    <h2 class="news_entry">
-                        <a href="/n/691511/" target="_blank">小程序之争，支付宝输了吗？</a>
-                    </h2>
-                    <div class="entry_summary" style="display: block;">
-                        <a href="/n/topic_131.htm"><img src="https://img2020.cnblogs.com/news_topic/20200919094033349-2075585200.png" class="topic_img" alt=""/></a>
-                        文/彦飞 来源：字母榜（ID：wujicaijing） 阿里与腾讯始于四年前的小程序之争，如今高下渐渐清晰。 3 月下旬，淘宝特价版计划开通微信小程序、支持微信支付，4 月初，闲鱼也向微信递交了小程序申请。字母榜（ID：wujicaijing）统计发现，目前已经或计划开设微信小程序的阿里系业务，包括
-                    </div>
-                    <div class="entry_footer">
-                        <a href="//home.cnblogs.com/u/itwriter/" class="gray" target="_blank">
-                            itwriter
-                        </a>投递&nbsp;
-                        <span class="comment">
-                            <a href="/n/691511#comment" class="gray" target="_blank">评论(0)</a>
-                        </span><span class="view">128 人浏览</span>
-                        <span class="tag"> <a href="/n/tag/%E5%B0%8F%E7%A8%8B%E5%BA%8F/" class="gray">小程序</a> <a href="/n/tag/%E6%94%AF%E4%BB%98%E5%AE%9D/" class="gray">支付宝</a> </span>
-                        发布于 <span class="gray">2021-04-22 22:00</span>
-                    </div>
-                    <!--end: entry_footer -->
-                </div>
-                <!--end: content -->
-                <div class="clear">
-                </div>
-            </div>
-            <!--end: news_block -->
-            <div class="clear">
-            </div>
-            <div class="news_block" id="entry_691510">
-                <div class="action">
-                    <div class="diggit" onclick="VoteNews(691510,'agree')">
-                        <span id="digg_num_691510" class="diggnum">0</span>
-                    </div>
-                    <div class="clear"></div>
-                    <div id="digg_tip_691510" class="digg-tip"></div>
-                </div>
-                <!--end: action -->
-                <div class="content">
-                    <h2 class="news_entry">
-                        <a href="/n/691510/" target="_blank">汽车“缺芯潮”下 产业链“跪产能”困局如何解？</a>
-                    </h2>
-                    <div class="entry_summary" style="display: block;">
-                        <a href="/n/topic_132.htm"><img src="//images0.cnblogs.com/news_topic/ITblog.jpg" class="topic_img" alt=""/></a>
-                        文/经纬创投主页君 来源：经纬创投（ID：matrixpartnerschina） 刘慈欣在他的科幻小说《球状闪电》里，讲述了地球受到一种特殊攻击，导致所有硅基芯片被毁，全世界陷入瘫痪的故事。从手机电脑，到汽车飞机，绝大部分现代产品都离不开芯片，而汽车业，正在经历芯片严重短缺的困境。 生产一辆汽车至
-                    </div>
-                    <div class="entry_footer">
-                        <a href="//home.cnblogs.com/u/itwriter/" class="gray" target="_blank">
-                            itwriter
-                        </a>投递&nbsp;
-                        <span class="comment">
-                            <a href="/n/691510#comment" class="gray" target="_blank">评论(0)</a>
-                        </span><span class="view">29 人浏览</span>
-                        
-                        发布于 <span class="gray">2021-04-22 21:09</span>
-                    </div>
-                    <!--end: entry_footer -->
-                </div>
-                <!--end: content -->
-                <div class="clear">
-                </div>
-            </div>
-            <!--end: news_block -->
-            <div class="clear">
-            </div>
-            <div class="news_block" id="entry_691509">
-                <div class="action">
-                    <div class="diggit" onclick="VoteNews(691509,'agree')">
-                        <span id="digg_num_691509" class="diggnum">0</span>
-                    </div>
-                    <div class="clear"></div>
-                    <div id="digg_tip_691509" class="digg-tip"></div>
-                </div>
-                <!--end: action -->
-                <div class="content">
-                    <h2 class="news_entry">
-                        <a href="/n/691509/" target="_blank">特斯拉现在道歉，还来得及吗？</a>
-                    </h2>
-                    <div class="entry_summary" style="display: block;">
-                        <a href="/n/topic_429.htm"><img src="https://img2020.cnblogs.com/news_topic/20200919095456914-256019808.png" class="topic_img" alt=""/></a>
-                        文/朱晓宇 来源：燃次元（ID：chaintruth） 风波中的特斯拉看上去似乎正在向消费者妥协。 4 月 21 日晚，特斯拉表示，为了维护消费者的权益，特斯拉愿意全力配合，提供事发前半小时的车辆原始数据给第三方鉴定机构或政府指定的技术监管部门或者消费者本人。同时恳请郑州市市监局指定权威的、有资质的
-                    </div>
-                    <div class="entry_footer">
-                        <a href="//home.cnblogs.com/u/itwriter/" class="gray" target="_blank">
-                            itwriter
-                        </a>投递&nbsp;
-                        <span class="comment">
-                            <a href="/n/691509#comment" class="gray" target="_blank">评论(0)</a>
-                        </span><span class="view">149 人浏览</span>
-                        <span class="tag"> <a href="/n/tag/Tesla/" class="gray">Tesla</a> </span>
-                        发布于 <span class="gray">2021-04-22 20:20</span>
-                    </div>
-                    <!--end: entry_footer -->
-                </div>
-                <!--end: content -->
-                <div class="clear">
-                </div>
-            </div>
-            <!--end: news_block -->
-            <div class="clear">
-            </div>
-            <div class="news_block" id="entry_691508">
-                <div class="action">
-                    <div class="diggit" onclick="VoteNews(691508,'agree')">
-                        <span id="digg_num_691508" class="diggnum">0</span>
-                    </div>
-                    <div class="clear"></div>
-                    <div id="digg_tip_691508" class="digg-tip"></div>
-                </div>
-                <!--end: action -->
-                <div class="content">
-                    <h2 class="news_entry">
-                        <a href="/n/691508/" target="_blank">上海车展观察：玩家掀自动驾驶地位锚定战 落地是竞争关键</a>
-                    </h2>
-                    <div class="entry_summary" style="display: block;">
-                        <a href="/n/topic_132.htm"><img src="//images0.cnblogs.com/news_topic/ITblog.jpg" class="topic_img" alt=""/></a>
-                        文/邻章 来源：邻章（ID：TMT317） 以“拥抱变化”为主题的第十九届上海国际汽车工业展览会正处进行时。 在此，观察本届车展，则不难发现，厂商拥抱变化的行为体现在方方面面，其中最为核心的变化，则是本届车展中，厂商都将高级别自动驾驶技术的量产落地能力作为了比拼核心，即使是在消费层面，用户对自动驾驶
-                    </div>
-                    <div class="entry_footer">
-                        <a href="//home.cnblogs.com/u/itwriter/" class="gray" target="_blank">
-                            itwriter
-                        </a>投递&nbsp;
-                        <span class="comment">
-                            <a href="/n/691508#comment" class="gray" target="_blank">评论(0)</a>
-                        </span><span class="view">47 人浏览</span>
-                        
-                        发布于 <span class="gray">2021-04-22 20:06</span>
-                    </div>
-                    <!--end: entry_footer -->
-                </div>
-                <!--end: content -->
-                <div class="clear">
-                </div>
-            </div>
-            <!--end: news_block -->
-            <div class="clear">
-            </div>
-            <div class="news_block" id="entry_691507">
-                <div class="action">
-                    <div class="diggit" onclick="VoteNews(691507,'agree')">
-                        <span id="digg_num_691507" class="diggnum">0</span>
-                    </div>
-                    <div class="clear"></div>
-                    <div id="digg_tip_691507" class="digg-tip"></div>
-                </div>
-                <!--end: action -->
-                <div class="content">
-                    <h2 class="news_entry">
-                        <a href="/n/691507/" target="_blank">Facebook被爆新漏洞：可收集用户的电子邮件信息</a>
-                    </h2>
-                    <div class="entry_summary" style="display: block;">
-                        <a href="/n/topic_21.htm"><img src="https://img2018.cnblogs.com/news_topic/20190903105334209-2022543618.png" class="topic_img" alt=""/></a>
-                        本月早些时候，有人在黑客论坛上放出了一个拥有 5.3 亿 Facebook 用户个人信息的数据集。随后该公司承认存在本次数据泄漏，但表示不会通知在该漏洞中受到影响的用户。 虽然 Facebook 表示已经修复了之前允许黑客从该社交平台上刮取数据的漏洞，不过一名安全研究人员发现了另一个漏洞。该漏洞允许
-                    </div>
-                    <div class="entry_footer">
-                        <a href="//home.cnblogs.com/u/itwriter/" class="gray" target="_blank">
-                            itwriter
-                        </a>投递&nbsp;
-                        <span class="comment">
-                            <a href="/n/691507#comment" class="gray" target="_blank">评论(0)</a>
-                        </span><span class="view">27 人浏览</span>
-                        <span class="tag"> <a href="/n/tag/Facebook/" class="gray">Facebook</a> </span>
-                        发布于 <span class="gray">2021-04-22 20:00</span>
-                    </div>
-                    <!--end: entry_footer -->
-                </div>
-                <!--end: content -->
-                <div class="clear">
-                </div>
-            </div>
-            <!--end: news_block -->
-            <div class="clear">
-            </div>
-            <div class="news_block" id="entry_691505">
-                <div class="action">
-                    <div class="diggit" onclick="VoteNews(691505,'agree')">
-                        <span id="digg_num_691505" class="diggnum">0</span>
-                    </div>
-                    <div class="clear"></div>
-                    <div id="digg_tip_691505" class="digg-tip"></div>
-                </div>
-                <!--end: action -->
-                <div class="content">
-                    <h2 class="news_entry">
-                        <a href="/n/691505/" target="_blank">打破纪录：科学家用九架太空望远镜观测了比邻星猛烈耀斑</a>
-                    </h2>
-                    <div class="entry_summary" style="display: block;">
-                        <a href="/n/topic_319.htm"><img src="https://img2018.cnblogs.com/news_topic/20181019121101783-952728829.gif" class="topic_img" alt=""/></a>
-                        据外媒报道，一个天文学家团队发现了一个来自太阳最近的邻居--比邻星(Proxima Centauri)的极端爆发或耀斑。他们的研究成果已发表在《The Astrophysical Journal Letters》上，它将有助于指导寻找太阳系以外的生命。 比邻星是一颗“红矮星”，质量约为太阳的八分之一
-                    </div>
-                    <div class="entry_footer">
-                        <a href="//home.cnblogs.com/u/itwriter/" class="gray" target="_blank">
-                            itwriter
-                        </a>投递&nbsp;
-                        <span class="comment">
-                            <a href="/n/691505#comment" class="gray" target="_blank">评论(0)</a>
-                        </span><span class="view">119 人浏览</span>
-                        
-                        发布于 <span class="gray">2021-04-22 16:48</span>
-                    </div>
-                    <!--end: entry_footer -->
-                </div>
-                <!--end: content -->
-                <div class="clear">
-                </div>
-            </div>
-            <!--end: news_block -->
-            <div class="clear">
-            </div>
-            <div class="news_block" id="entry_691504">
-                <div class="action">
-                    <div class="diggit" onclick="VoteNews(691504,'agree')">
-                        <span id="digg_num_691504" class="diggnum">2</span>
-                    </div>
-                    <div class="clear"></div>
-                    <div id="digg_tip_691504" class="digg-tip"></div>
-                </div>
-                <!--end: action -->
-                <div class="content">
-                    <h2 class="news_entry">
-                        <a href="/n/691504/" target="_blank">优麒麟 20.04 LTS Pro 发布 - 以初心，铸匠心</a>
-                    </h2>
-                    <div class="entry_summary" style="display: block;">
-                        <a href="/n/topic_2648.htm"><img src="https://img2018.cnblogs.com/news_topic/20200116165638321-424961547.gif" class="topic_img" alt=""/></a>
-                        北京时间 2021 年 4 月 22 日，优麒麟团队很高兴地宣布优麒麟（Ubuntu Kylin）开源操作系统 20.04&#160;LTS&#160;Pro 版本正式发布。优麒麟 20.04 Pro 是基于 20.04 长期支持版本的更新，官方将提供 5 年的技术支持。 优麒麟 20.04 Pro 版本默认搭载最新&#160;
-                    </div>
-                    <div class="entry_footer">
-                        <a href="//home.cnblogs.com/u/itwriter/" class="gray" target="_blank">
-                            itwriter
-                        </a>投递&nbsp;
-                        <span class="comment">
-                            <a href="/n/691504#comment" class="gray" target="_blank">评论(0)</a>
-                        </span><span class="view">217 人浏览</span>
-                        <span class="tag"> <a href="/n/tag/%E4%BC%98%E9%BA%92%E9%BA%9F/" class="gray">优麒麟</a> </span>
-                        发布于 <span class="gray">2021-04-22 16:40</span>
-                    </div>
-                    <!--end: entry_footer -->
-                </div>
-                <!--end: content -->
-                <div class="clear">
-                </div>
-            </div>
-            <!--end: news_block -->
-            <div class="clear">
-            </div>
-            <div class="news_block" id="entry_691506">
-                <div class="action">
-                    <div class="diggit" onclick="VoteNews(691506,'agree')">
-                        <span id="digg_num_691506" class="diggnum">0</span>
-                    </div>
-                    <div class="clear"></div>
-                    <div id="digg_tip_691506" class="digg-tip"></div>
-                </div>
-                <!--end: action -->
-                <div class="content">
-                    <h2 class="news_entry">
-                        <a href="/n/691506/" target="_blank">Android 12将带来显著改善App启动体验的新版Splash Screens</a>
-                    </h2>
-                    <div class="entry_summary" style="display: block;">
-                        <a href="/n/topic_148.htm"><img src="//images2015.cnblogs.com/news_topic/20161020185521154-1185360701.png" class="topic_img" alt=""/></a>
-                        随着 Android 12 即将从开发者预览转入公测，我们发现它对普通用户的最大体验改进，或许就是应用的启动界面了。多年来，开发者已经习惯了为 App 设计基础的 Splash Screens 。不过随着谷歌致力于改进 App 的启动体验，后续 Android 12 移动操作系统将默认带来更轻快、一
-                    </div>
-                    <div class="entry_footer">
-                        <a href="//home.cnblogs.com/u/itwriter/" class="gray" target="_blank">
-                            itwriter
-                        </a>投递&nbsp;
-                        <span class="comment">
-                            <a href="/n/691506#comment" class="gray" target="_blank">评论(0)</a>
-                        </span><span class="view">67 人浏览</span>
-                        <span class="tag"> <a href="/n/tag/Android/" class="gray">Android</a> </span>
-                        发布于 <span class="gray">2021-04-22 16:30</span>
-                    </div>
-                    <!--end: entry_footer -->
-                </div>
-                <!--end: content -->
-                <div class="clear">
-                </div>
-            </div>
-            <!--end: news_block -->
-            <div class="clear">
-            </div>
-            <div class="news_block" id="entry_691503">
-                <div class="action">
-                    <div class="diggit" onclick="VoteNews(691503,'agree')">
-                        <span id="digg_num_691503" class="diggnum">0</span>
-                    </div>
-                    <div class="clear"></div>
-                    <div id="digg_tip_691503" class="digg-tip"></div>
-                </div>
-                <!--end: action -->
-                <div class="content">
-                    <h2 class="news_entry">
-                        <a href="/n/691503/" target="_blank">百度诉一公司欺骗其排序算法 涉“搜索引擎优化”不正当竞争</a>
-                    </h2>
-                    <div class="entry_summary" style="display: block;">
-                        <a href="/n/topic_5.htm"><img src="//images0.cnblogs.com/news_topic/baidu.jpg" class="topic_img" alt=""/></a>
-                        近日，海淀法院审理了百度公司状告深圳一优网络科技有限公司不正当竞争纠纷一案。据悉，这是首例涉“搜索引擎优化”不正当竞争纠纷案。4 月 20 日下午，海淀法院民事审判五庭（知识产权审判庭）前往中关村知识产权保护中心开展案件巡回审理活动，公开审理了此案。 原告百度公司诉称，其是百度网的运营者，百度公司为
-                    </div>
-                    <div class="entry_footer">
-                        <a href="//home.cnblogs.com/u/itwriter/" class="gray" target="_blank">
-                            itwriter
-                        </a>投递&nbsp;
-                        <span class="comment">
-                            <a href="/n/691503#comment" class="gray" target="_blank">评论(0)</a>
-                        </span><span class="view">255 人浏览</span>
-                        <span class="tag"> <a href="/n/tag/%E7%99%BE%E5%BA%A6/" class="gray">百度</a> </span>
-                        发布于 <span class="gray">2021-04-22 16:30</span>
-                    </div>
-                    <!--end: entry_footer -->
-                </div>
-                <!--end: content -->
-                <div class="clear">
-                </div>
-            </div>
-            <!--end: news_block -->
-            <div class="clear">
-            </div>
-            <div class="news_block" id="entry_691502">
-                <div class="action">
-                    <div class="diggit" onclick="VoteNews(691502,'agree')">
-                        <span id="digg_num_691502" class="diggnum">0</span>
-                    </div>
-                    <div class="clear"></div>
-                    <div id="digg_tip_691502" class="digg-tip"></div>
-                </div>
-                <!--end: action -->
-                <div class="content">
-                    <h2 class="news_entry">
-                        <a href="/n/691502/" target="_blank">机器学习助力：谷歌Play商店2020年检出近百万违规应用</a>
-                    </h2>
-                    <div class="entry_summary" style="display: block;">
-                        <a href="/n/topic_1.htm"><img src="https://img2018.cnblogs.com/news_topic/20190730073028742-506112123.png" class="topic_img" alt=""/></a>
-                        与苹果 iOS 相比，谷歌 Android 生态相对更开放一些。但是在 Play 商店应用的审核上，它似乎也没有 App Store 那么严格。考虑到无法逐一检查开发者提交的每一款应用，多年来谷歌一直在努力提升机器学习（ML）技术和人工智能（AI）算法的 App 筛查水平。近日，谷歌披露了最新的数据
-                    </div>
-                    <div class="entry_footer">
-                        <a href="//home.cnblogs.com/u/itwriter/" class="gray" target="_blank">
-                            itwriter
-                        </a>投递&nbsp;
-                        <span class="comment">
-                            <a href="/n/691502#comment" class="gray" target="_blank">评论(0)</a>
-                        </span><span class="view">55 人浏览</span>
-                        <span class="tag"> <a href="/n/tag/Google/" class="gray">Google</a> </span>
-                        发布于 <span class="gray">2021-04-22 16:23</span>
-                    </div>
-                    <!--end: entry_footer -->
-                </div>
-                <!--end: content -->
-                <div class="clear">
-                </div>
-            </div>
-            <!--end: news_block -->
-            <div class="clear">
-            </div>
-            <div class="news_block" id="entry_691501">
-                <div class="action">
-                    <div class="diggit" onclick="VoteNews(691501,'agree')">
-                        <span id="digg_num_691501" class="diggnum">0</span>
-                    </div>
-                    <div class="clear"></div>
-                    <div id="digg_tip_691501" class="digg-tip"></div>
-                </div>
-                <!--end: action -->
-                <div class="content">
-                    <h2 class="news_entry">
-                        <a href="/n/691501/" target="_blank">如何在Firefox 89中恢复“紧凑”密度选项</a>
-                    </h2>
-                    <div class="entry_summary" style="display: block;">
-                        <a href="/n/topic_41.htm"><img src="https://img2018.cnblogs.com/news_topic/20191124180522009-1087882610.png" class="topic_img" alt=""/></a>
-                        Mozilla 计划于今年 6 月 1 日发布采用 Proton UI 的 Firefox 89。在该版本更新中，Mozilla 原本计划从自定义工具栏中取消“紧凑视图” 。不过在用户的强烈反馈下，Mozilla 决定继续保留该视图。 不过在 Firefox 89 版本更新之后，Mozilla 决定
-                    </div>
-                    <div class="entry_footer">
-                        <a href="//home.cnblogs.com/u/itwriter/" class="gray" target="_blank">
-                            itwriter
-                        </a>投递&nbsp;
-                        <span class="comment">
-                            <a href="/n/691501#comment" class="gray" target="_blank">评论(0)</a>
-                        </span><span class="view">54 人浏览</span>
-                        <span class="tag"> <a href="/n/tag/Firefox/" class="gray">Firefox</a> </span>
-                        发布于 <span class="gray">2021-04-22 16:15</span>
-                    </div>
-                    <!--end: entry_footer -->
-                </div>
-                <!--end: content -->
-                <div class="clear">
-                </div>
-            </div>
-            <!--end: news_block -->
-            <div class="clear">
-            </div>
-            <div class="news_block" id="entry_691500">
-                <div class="action">
-                    <div class="diggit" onclick="VoteNews(691500,'agree')">
-                        <span id="digg_num_691500" class="diggnum">0</span>
-                    </div>
-                    <div class="clear"></div>
-                    <div id="digg_tip_691500" class="digg-tip"></div>
-                </div>
-                <!--end: action -->
-                <div class="content">
-                    <h2 class="news_entry">
-                        <a href="/n/691500/" target="_blank">难度升级：NASA定于本周四开启火星直升机的第二次飞行测试</a>
-                    </h2>
-                    <div class="entry_summary" style="display: block;">
-                        <a href="/n/topic_345.htm"><img src="https://img2018.cnblogs.com/news_topic/20190528103402943-154105954.png" class="topic_img" alt=""/></a>
-                        4 月 19 日，美国宇航局“毅力号”（Perseverance）火星车搭载的“机巧号”（Ingenuity）直升机，成功地在火星上实现了首次飞行。按照计划，NASA JPL 团队还计划在 4 月 22 日开展第二次飞行。如果一切顺利，火星直升机将以略带侧倾角的姿态，飞到距离毅力号更远的地方。感兴趣
-                    </div>
-                    <div class="entry_footer">
-                        <a href="//home.cnblogs.com/u/itwriter/" class="gray" target="_blank">
-                            itwriter
-                        </a>投递&nbsp;
-                        <span class="comment">
-                            <a href="/n/691500#comment" class="gray" target="_blank">评论(0)</a>
-                        </span><span class="view">64 人浏览</span>
-                        <span class="tag"> <a href="/n/tag/NASA/" class="gray">NASA</a> </span>
-                        发布于 <span class="gray">2021-04-22 16:08</span>
-                    </div>
-                    <!--end: entry_footer -->
-                </div>
-                <!--end: content -->
-                <div class="clear">
-                </div>
-            </div>
-            <!--end: news_block -->
-            <div class="clear">
-            </div>
-            <div class="news_block" id="entry_691499">
-                <div class="action">
-                    <div class="diggit" onclick="VoteNews(691499,'agree')">
-                        <span id="digg_num_691499" class="diggnum">0</span>
-                    </div>
-                    <div class="clear"></div>
-                    <div id="digg_tip_691499" class="digg-tip"></div>
-                </div>
-                <!--end: action -->
-                <div class="content">
-                    <h2 class="news_entry">
-                        <a href="/n/691499/" target="_blank">苹果举办多项活动庆祝世界地球日：健身30分钟可获特殊徽章</a>
-                    </h2>
-                    <div class="entry_summary" style="display: block;">
-                        <a href="/n/topic_82.htm"><img src="https://img2018.cnblogs.com/news_topic/20190822140314801-1842879152.png" class="topic_img" alt=""/></a>
-                        为庆祝地球日（4 月 22 日），苹果和往年一样通过在金融、教育领域的一系列活动来表明公司在环保方面的努力。2021 年地球日，苹果公司将重点放在了教育方面。该公司正在通过其各种平台，提供新的具有环保意识的内容，希望能成为变革的催化剂，让用户了解气候问题和其他关键事项。 苹果公司环境、政策和社会倡议
-                    </div>
-                    <div class="entry_footer">
-                        <a href="//home.cnblogs.com/u/itwriter/" class="gray" target="_blank">
-                            itwriter
-                        </a>投递&nbsp;
-                        <span class="comment">
-                            <a href="/n/691499#comment" class="gray" target="_blank">评论(0)</a>
-                        </span><span class="view">68 人浏览</span>
-                        <span class="tag"> <a href="/n/tag/%E8%8B%B9%E6%9E%9C/" class="gray">苹果</a> </span>
-                        发布于 <span class="gray">2021-04-22 16:00</span>
-                    </div>
-                    <!--end: entry_footer -->
-                </div>
-                <!--end: content -->
-                <div class="clear">
-                </div>
-            </div>
-            <!--end: news_block -->
-            <div class="clear">
-            </div>
-            <div class="news_block" id="entry_691498">
-                <div class="action">
-                    <div class="diggit" onclick="VoteNews(691498,'agree')">
-                        <span id="digg_num_691498" class="diggnum">0</span>
-                    </div>
-                    <div class="clear"></div>
-                    <div id="digg_tip_691498" class="digg-tip"></div>
-                </div>
-                <!--end: action -->
-                <div class="content">
-                    <h2 class="news_entry">
-                        <a href="/n/691498/" target="_blank">华为正式官宣：进军智慧教室产业</a>
-                    </h2>
-                    <div class="entry_summary" style="display: block;">
-                        <a href="/n/topic_188.htm"><img src="https://img2018.cnblogs.com/news_topic/20190730153501178-1904121953.png" class="topic_img" alt=""/></a>
-                        4 月 22 日，华为正式官宣：“我们要进军智慧教室产业啦，4 月 23 日我们厦门教育装备展见。” 网友表示：这是降维打击呀！ 早在上个月，华为就推出了智慧教室解决方案，华为新推出的协作平板系列华为 IdeaHub board 融合了柔光护眼、华为变屏、智绘妙笔等一系列科技，集合海量专属大屏应用，
-                    </div>
-                    <div class="entry_footer">
-                        <a href="//home.cnblogs.com/u/itwriter/" class="gray" target="_blank">
-                            itwriter
-                        </a>投递&nbsp;
-                        <span class="comment">
-                            <a href="/n/691498#comment" class="gray" target="_blank">评论(0)</a>
-                        </span><span class="view">365 人浏览</span>
-                        <span class="tag"> <a href="/n/tag/%E5%8D%8E%E4%B8%BA/" class="gray">华为</a> </span>
-                        发布于 <span class="gray">2021-04-22 15:45</span>
-                    </div>
-                    <!--end: entry_footer -->
-                </div>
-                <!--end: content -->
-                <div class="clear">
-                </div>
-            </div>
-            <!--end: news_block -->
-            <div class="clear">
-            </div>
-            <div class="news_block" id="entry_691497">
-                <div class="action">
-                    <div class="diggit" onclick="VoteNews(691497,'agree')">
-                        <span id="digg_num_691497" class="diggnum">1</span>
-                    </div>
-                    <div class="clear"></div>
-                    <div id="digg_tip_691497" class="digg-tip"></div>
-                </div>
-                <!--end: action -->
-                <div class="content">
-                    <h2 class="news_entry">
-                        <a href="/n/691497/" target="_blank">有了这几款插件 就没你存不下来的图片</a>
-                    </h2>
-                    <div class="entry_summary" style="display: block;">
-                        <a href="/n/topic_132.htm"><img src="//images0.cnblogs.com/news_topic/ITblog.jpg" class="topic_img" alt=""/></a>
-                        想必各位差友们在浏览网页时，遇到一些好看的图片，都有保存下来的习惯。 如果图片比较多，那一张张手动保存不仅会消耗大量时间和精力，还可能遇到一些图片无法保存的情况。 有的差友可能会使用 Ctrl+S 把整个网页存下来，虽然这个方法能用，但是通过这种方式保存的图片不仅不够全面，还可能都是低分辨率的缩略图
-                    </div>
-                    <div class="entry_footer">
-                        <a href="//home.cnblogs.com/u/itwriter/" class="gray" target="_blank">
-                            itwriter
-                        </a>投递&nbsp;
-                        <span class="comment">
-                            <a href="/n/691497#comment" class="gray" target="_blank">评论(0)</a>
-                        </span><span class="view">287 人浏览</span>
-                        
-                        发布于 <span class="gray">2021-04-22 15:40</span>
-                    </div>
-                    <!--end: entry_footer -->
-                </div>
-                <!--end: content -->
-                <div class="clear">
-                </div>
-            </div>
-            <!--end: news_block -->
-            <div class="clear">
-            </div>
-    </div>
-    <div class="pager"><a href="/" class="p_1 current">1</a><a href="/n/page/2/" class="p_2 middle">2</a><a href="/n/page/3/" class="p_3 middle">3</a><a href="/n/page/4/" class="p_4 middle">4</a><a href="/n/page/5/" class="p_5 middle">5</a><a href="/n/page/6/" class="p_6 middle">6</a><a href="/n/page/7/" class="p_7 middle">7</a><a href="/n/page/8/" class="p_8 middle">8</a><a href="/n/page/9/" class="p_9 middle">9</a><span class="ellipsis">···</span><a href="/n/page/100/" class="p_100 last">100</a><a href="/n/page/2/">Next &gt;</a></div>
+    <div id="under_post_card2"></div>
+    <div id="HistoryToday" class="under-post-card"></div>
+    <script type="text/javascript">
+       var commentManager = new blogCommentManager();
+       commentManager.renderComments(0);
+       fixPostBody();
+       deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);       deliverT2();
+       deliverC1C2();
+       loadNewsAndKb();
+       loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);       LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+       GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+       loadOptUnderPost();
+       GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
 </div>
 
 
-<script type="text/javascript">
-    $(function () {
-        LoadNewsCategory("NewsCategoryId",11,0);
-        //新闻列表-右侧编辑推荐新闻
-        CommonLoadNews("/NewsAjax/GetRecommendNews", "RecommendNewsId", 7);
-        //新闻列表-右侧今日新闻排行
-        CommonLoadNews("/NewsAjax/GetHotNews", "HotNewsId", 10);
-        //新闻列表-右侧24小时推荐排行
-        CommonLoadNews("/NewsAjax/GetHotByDiggCount", "HotByDiggCountId", 7);
-        //新闻列表-右侧热门IT新闻
-        CommonLoadNews("/NewsAjax/GetRecentHotNews", "RecentHotNewsId", 10);
-        //新闻列表-右侧最新评论
-        LoadSideComments("NewsIndexCommentsId", 15);
-        CheckAudit();
-        LoadIndexSideInfo();
-    });
-</script>
-        <div id="sideright">
-            
-    <div style="margin-top:25px;">
-        <span id="lbAuditTips" style="display:none;"></span>
-        <div class="news_home_navlink">
-            <div id="rss_sub_top" class="rss_sub">
-                <a href="http://feed.cnblogs.com/news/rss" title="博客园IT新闻RSS订阅">
-                    <img src="//common.cnblogs.com/images/icon_rss.gif" alt="RSS订阅" />
-                </a>
-            </div>
-            <div style="line-height:30px;">
-                &gt; <a href="https://www.cnblogs.com/news/" class="big">新闻栏目</a><br />
-                &gt; <a href="/n/date/" class="big">新闻日历</a><br />
-                &gt; <a href="/n/topiclist/" class="big">新闻主题</a><br />
-            </div>
-        </div>
-        <div class="clear">
-        </div>
-        <br />
-        <div id="side_right_search">
-            <input type="text" id="google_search_q" size="27" class="side_right_search_q" onkeydown="return google_search_enter(event);" />
-            <input type="submit" name="sa" value="搜索新闻" class="side_right_search_sa" onclick="return google_search();" />
-        </div>
-<div class="side_block">
-    <div class="a4content" id="e2">
-        <div id="div-gpt-ad-1533633736227-1" style="height:250px; width:300px;">
-            <script>
-                googletag.cmd.push(function () { googletag.display('div-gpt-ad-1533633736227-1'); });
-            </script>
-        </div>
-    </div>
-</div>        <div class="side_block" id="cate_news">
-            <h3 class="title_yellow">
-                新闻类别
-            </h3>
-            <div class="indent" id="NewsCategoryId">
-            </div>
-        </div>
-        <div id="HotNews1_panelToday">
-            <div class="side_block" id="last_news">
-                <h3 class="title_blue">
-                    今日新闻排行
-                </h3>
-                <ul class="topnews block_list bt" id="HotNewsId">
-                </ul>
-            </div>
-        </div>
-        <div class="side_block">
-            <h3 class="title_yellow">
-                编辑推荐新闻
-            </h3>
-            <ul class="topnews block_list bt" id="RecommendNewsId">
-            </ul>
-        </div>
-        <div id="HotNews1_panelDiggTop">
-            <div class="side_block" id="Div1">
-                <h3 class="title_green">
-                    24小时推荐排行
-                </h3>
-                <ul class="topnews block_list bt" id="HotByDiggCountId">
-                </ul>
-            </div>
-        </div>
-        <div class="side_block" id="hot_news">
-            <h3 class="title_red">
-                热门IT新闻
-            </h3>
-            <ul class="topnews block_list bt" id="RecentHotNewsId">
-            </ul>
-        </div>
-<div class="side_block">
-    <div id="e3">
-        <div id="div-gpt-ad-1533633736227-2" style="height:250px; width:300px;">
-            <script>
-                googletag.cmd.push(function () { googletag.display('div-gpt-ad-1533633736227-2'); });
-            </script>
-        </div>
-    </div>
-</div>        <div class="side_block">
-            <h3 class="title_green">
-                最新评论
-            </h3>
-            <ul class="block_list" id="NewsIndexCommentsId">
-            </ul>
-            <a href="/Comment">
-                <img src="/Images/more_comment.gif" title="更多最新评论" style="float: right; margin: 7px;" alt="" />
-            </a>
-            <div style="clear: both;">
-            </div>
-        </div>
-        <a name="more"></a>
-        <div id="rss_sub_bottom" class="rss_sub">
-            <a href="http://feed.cnblogs.com/news/rss" title="博客园IT新闻RSS订阅">
-                <img src="//common.cnblogs.com/images/icon_rss_news.gif" alt="RSS订阅" />
-            </a>
-            <a href="//news.cnblogs.com/m" rel="nofollow" title="博客园新闻频道手机版">
-                <img src="/Images/ico_ing_cellphone.gif" alt="手机版" />
-            </a>
-        </div>
-    </div>
 
-        </div>
-        <div class="clear">
-        </div>
-        <div id="footer">
-            <div id="foot">
-                <a href="//www.cnblogs.com/AboutUS.aspx">关于博客园</a>
-                <a href="//www.cnblogs.com/ContactUs.aspx">联系我们</a>
-                <a href="//www.cnblogs.com/ad.aspx">广告服务</a>
-                <a href="https://beian.miit.gov.cn/" target="_blank">沪ICP备09004260号-1</a>
-                <span>&copy;2004-2021</span>
-                <a href="//www.cnblogs.com">博客园</a>
-                <span id="powered_by">Powered by .NET on Kubernetes</span>
-            </div>
-            <div id="footMobile" style="display:none;">
-                <span>&copy;2004-2021</span>&nbsp;<a href="//www.cnblogs.com">博客园</a>
-            </div>
-        </div>
-        <script type="text/javascript">
-            var _gaq = _gaq || [];
-            _gaq.push(['_setAccount', 'UA-476124-8']);
-            _gaq.push(['_trackPageview']);
-            (function () {
-                var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-            })();
-        </script>
-    </div>
+</div>
+</div>
+<div id="leftmenu">
+
+
+<h3>导航</h3>
+<ul>
+    <li>
+        <a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+
+    </li>
+    <li>
+        
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/dstang2000/">
+首页</a>
+
+    </li>
+    <li>
+        
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+
+    </li>
+    <li>
+        
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/%E6%8B%93%E8%8D%92%E8%80%85">
+联系</a>
+    </li>
+    <li>
+        
+<a id="blog_nav_rss" class="menu" href="javascript:void(0)" data-rss="https://www.cnblogs.com/dstang2000/rss/">
+订阅</a>
+        
+<a id="blog_nav_rss_image" href="https://www.cnblogs.com/dstang2000/rss/">
+    <img src="/skins/anothereon001/images/xml.gif" alt="订阅" />
+</a>
+    </li>
+    <li>
+        
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+
+    </li>
+</ul>
+
+
+<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+<div id="sidebar_c3"></div>
+<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+
+</div>
+</div>
+<div class="clear"></div>
+<div id="footer">
+<p id="footer">
+	Powered by: 
+	<br />
+	
+	<a href="https://www.cnblogs.com/" id="footer_site_link">博客园</a>
+	<br />
+	Copyright &copy; 2021 拓荒者
+<br /><span id="poweredby">Powered by .NET 5.0 on Kubernetes</span>
+
+</p>
+
+
+</div>
+</div>
+
+
+    
+
+    <input type="hidden" id="antiforgery_token" value="CfDJ8L-rpLgFVEJMgssCVvNUAjssTBHoMdFXlMh_LzOoTgCC2WtlzFqRod6ZkY858MoA6k6At2LygWF1EnYqZCaN7zxcZuBJLZ9va4DKzbXhEgrmF3MOXpOJNvoC7YdZp0zB3FCxVLlRLzrpkjNBPJov1Qc" />
 </body>
 </html>

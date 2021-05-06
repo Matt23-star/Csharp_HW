@@ -33,35 +33,36 @@ namespace Crawler
             this.panel1 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.Webs = new System.Windows.Forms.GroupBox();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.urlListBox = new System.Windows.Forms.ListBox();
+            this.urlBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.urlListBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.messagesSource = new System.Windows.Forms.BindingSource(this.components);
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.stateListBox = new System.Windows.Forms.ListBox();
+            this.stateBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.stateListBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.panel4 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.stopButton = new System.Windows.Forms.Button();
+            this.sendURL = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
             this.urlTextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.sendURL = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.stateBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.webBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
-            this.stateListBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.messages = new System.Windows.Forms.BindingSource(this.components);
-            this.urlDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.stateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.Webs.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.urlBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.urlListBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.messagesSource)).BeginInit();
+            this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.stateBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.stateListBindingSource)).BeginInit();
             this.panel4.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
+            this.panel5.SuspendLayout();
             this.panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.stateBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.webBindingSource1)).BeginInit();
-            this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.stateListBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.messages)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -93,7 +94,7 @@ namespace Crawler
             // 
             // Webs
             // 
-            this.Webs.Controls.Add(this.dataGridView1);
+            this.Webs.Controls.Add(this.urlListBox);
             this.Webs.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Webs.Location = new System.Drawing.Point(3, 3);
             this.Webs.Name = "Webs";
@@ -102,20 +103,67 @@ namespace Crawler
             this.Webs.TabStop = false;
             this.Webs.Text = "爬取网址";
             // 
-            // dataGridView1
+            // urlListBox
             // 
-            this.dataGridView1.AutoGenerateColumns = false;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.urlDataGridViewTextBoxColumn});
-            this.dataGridView1.DataSource = this.webBindingSource1;
-            this.dataGridView1.Location = new System.Drawing.Point(-22, 29);
-            this.dataGridView1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersWidth = 51;
-            this.dataGridView1.RowTemplate.Height = 27;
-            this.dataGridView1.Size = new System.Drawing.Size(843, 440);
-            this.dataGridView1.TabIndex = 1;
+            this.urlListBox.DataSource = this.urlBindingSource;
+            this.urlListBox.DisplayMember = "url";
+            this.urlListBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.urlListBox.FormattingEnabled = true;
+            this.urlListBox.ItemHeight = 24;
+            this.urlListBox.Location = new System.Drawing.Point(3, 31);
+            this.urlListBox.MaximumSize = new System.Drawing.Size(793, 465);
+            this.urlListBox.MinimumSize = new System.Drawing.Size(793, 465);
+            this.urlListBox.Name = "urlListBox";
+            this.urlListBox.Size = new System.Drawing.Size(793, 465);
+            this.urlListBox.TabIndex = 2;
+            // 
+            // urlBindingSource
+            // 
+            this.urlBindingSource.DataSource = this.urlListBindingSource;
+            // 
+            // urlListBindingSource
+            // 
+            this.urlListBindingSource.DataMember = "urlList";
+            this.urlListBindingSource.DataSource = this.messagesSource;
+            // 
+            // messagesSource
+            // 
+            this.messagesSource.DataSource = typeof(Crawler.SimpleCrawler);
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.stateListBox);
+            this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox2.Location = new System.Drawing.Point(808, 3);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(339, 499);
+            this.groupBox2.TabIndex = 1;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "爬取状态";
+            // 
+            // stateListBox
+            // 
+            this.stateListBox.DataSource = this.stateBindingSource;
+            this.stateListBox.DisplayMember = "state";
+            this.stateListBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.stateListBox.FormattingEnabled = true;
+            this.stateListBox.ItemHeight = 24;
+            this.stateListBox.Location = new System.Drawing.Point(3, 31);
+            this.stateListBox.MaximumSize = new System.Drawing.Size(333, 465);
+            this.stateListBox.MinimumSize = new System.Drawing.Size(333, 465);
+            this.stateListBox.Name = "stateListBox";
+            this.stateListBox.Size = new System.Drawing.Size(333, 465);
+            this.stateListBox.TabIndex = 0;
+            this.stateListBox.SelectedIndexChanged += new System.EventHandler(this.stateListBox_SelectedIndexChanged);
+            // 
+            // stateBindingSource
+            // 
+            this.stateBindingSource.DataSource = this.stateListBindingSource;
+            // 
+            // stateListBindingSource
+            // 
+            this.stateListBindingSource.DataMember = "stateList";
+            this.stateListBindingSource.DataSource = this.messagesSource;
             // 
             // panel4
             // 
@@ -132,8 +180,8 @@ namespace Crawler
             this.tableLayoutPanel1.ColumnCount = 2;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
+            this.tableLayoutPanel1.Controls.Add(this.panel5, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.panel3, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.sendURL, 1, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -141,6 +189,44 @@ namespace Crawler
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1150, 162);
             this.tableLayoutPanel1.TabIndex = 2;
+            // 
+            // panel5
+            // 
+            this.panel5.Controls.Add(this.stopButton);
+            this.panel5.Controls.Add(this.sendURL);
+            this.panel5.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel5.Location = new System.Drawing.Point(808, 66);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(339, 93);
+            this.panel5.TabIndex = 3;
+            // 
+            // stopButton
+            // 
+            this.stopButton.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.stopButton.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.stopButton.Location = new System.Drawing.Point(0, 53);
+            this.stopButton.MaximumSize = new System.Drawing.Size(339, 40);
+            this.stopButton.MinimumSize = new System.Drawing.Size(339, 40);
+            this.stopButton.Name = "stopButton";
+            this.stopButton.Size = new System.Drawing.Size(339, 40);
+            this.stopButton.TabIndex = 1;
+            this.stopButton.Text = "暂停";
+            this.stopButton.UseVisualStyleBackColor = true;
+            this.stopButton.Click += new System.EventHandler(this.stopButton_Click);
+            // 
+            // sendURL
+            // 
+            this.sendURL.AutoSize = true;
+            this.sendURL.Dock = System.Windows.Forms.DockStyle.Top;
+            this.sendURL.Location = new System.Drawing.Point(0, 0);
+            this.sendURL.MaximumSize = new System.Drawing.Size(339, 40);
+            this.sendURL.MinimumSize = new System.Drawing.Size(339, 40);
+            this.sendURL.Name = "sendURL";
+            this.sendURL.Size = new System.Drawing.Size(339, 40);
+            this.sendURL.TabIndex = 0;
+            this.sendURL.Text = "确认";
+            this.sendURL.UseVisualStyleBackColor = true;
+            this.sendURL.Click += new System.EventHandler(this.sendURL_Click);
             // 
             // panel3
             // 
@@ -174,18 +260,6 @@ namespace Crawler
             this.label1.Text = "URL自定义";
             this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
-            // sendURL
-            // 
-            this.sendURL.AutoSize = true;
-            this.sendURL.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.sendURL.Location = new System.Drawing.Point(808, 123);
-            this.sendURL.Name = "sendURL";
-            this.sendURL.Size = new System.Drawing.Size(339, 36);
-            this.sendURL.TabIndex = 0;
-            this.sendURL.Text = "确认";
-            this.sendURL.UseVisualStyleBackColor = true;
-            this.sendURL.Click += new System.EventHandler(this.sendURL_Click);
-            // 
             // panel2
             // 
             this.panel2.AutoSize = true;
@@ -195,90 +269,34 @@ namespace Crawler
             this.panel2.Size = new System.Drawing.Size(1150, 0);
             this.panel2.TabIndex = 4;
             // 
-            // stateBindingSource
-            // 
-            this.stateBindingSource.DataSource = this.stateListBindingSource;
-            // 
-            // webBindingSource1
-            // 
-            this.webBindingSource1.DataMember = "urlList";
-            this.webBindingSource1.DataSource = this.messages;
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.dataGridView2);
-            this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox2.Location = new System.Drawing.Point(808, 3);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(339, 499);
-            this.groupBox2.TabIndex = 1;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "爬取状态";
-            // 
-            // dataGridView2
-            // 
-            this.dataGridView2.AutoGenerateColumns = false;
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.stateDataGridViewTextBoxColumn});
-            this.dataGridView2.DataSource = this.stateBindingSource;
-            this.dataGridView2.Location = new System.Drawing.Point(-10, 29);
-            this.dataGridView2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.RowHeadersWidth = 51;
-            this.dataGridView2.RowTemplate.Height = 27;
-            this.dataGridView2.Size = new System.Drawing.Size(359, 440);
-            this.dataGridView2.TabIndex = 2;
-            // 
-            // stateListBindingSource
-            // 
-            this.stateListBindingSource.DataMember = "stateList";
-            this.stateListBindingSource.DataSource = this.messages;
-            // 
-            // messages
-            // 
-            this.messages.DataSource = typeof(Crawler.SimpleCrawler);
-            // 
-            // urlDataGridViewTextBoxColumn
-            // 
-            this.urlDataGridViewTextBoxColumn.DataPropertyName = "url";
-            this.urlDataGridViewTextBoxColumn.HeaderText = "网址";
-            this.urlDataGridViewTextBoxColumn.MinimumWidth = 10;
-            this.urlDataGridViewTextBoxColumn.Name = "urlDataGridViewTextBoxColumn";
-            this.urlDataGridViewTextBoxColumn.Width = 200;
-            // 
-            // stateDataGridViewTextBoxColumn
-            // 
-            this.stateDataGridViewTextBoxColumn.DataPropertyName = "state";
-            this.stateDataGridViewTextBoxColumn.HeaderText = "状态";
-            this.stateDataGridViewTextBoxColumn.MinimumWidth = 10;
-            this.stateDataGridViewTextBoxColumn.Name = "stateDataGridViewTextBoxColumn";
-            this.stateDataGridViewTextBoxColumn.Width = 200;
-            // 
             // Form1
             // 
+            this.AcceptButton = this.sendURL;
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1150, 667);
             this.Controls.Add(this.panel1);
+            this.Location = new System.Drawing.Point(1176, 738);
+            this.MaximumSize = new System.Drawing.Size(1176, 738);
+            this.MinimumSize = new System.Drawing.Size(1176, 738);
             this.Name = "Form1";
             this.Text = "Form1";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.tableLayoutPanel2.ResumeLayout(false);
             this.Webs.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.urlBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.urlListBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.messagesSource)).EndInit();
+            this.groupBox2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.stateBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.stateListBindingSource)).EndInit();
             this.panel4.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
-            this.tableLayoutPanel1.PerformLayout();
+            this.panel5.ResumeLayout(false);
+            this.panel5.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.stateBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.webBindingSource1)).EndInit();
-            this.groupBox2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.stateListBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.messages)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -295,15 +313,16 @@ namespace Crawler
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.GroupBox Webs;
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.BindingSource messages;
-        private System.Windows.Forms.BindingSource webBindingSource1;
+        private System.Windows.Forms.BindingSource messagesSource;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.DataGridView dataGridView2;
+        private System.Windows.Forms.BindingSource urlBindingSource;
+        private System.Windows.Forms.BindingSource urlListBindingSource;
         private System.Windows.Forms.BindingSource stateBindingSource;
         private System.Windows.Forms.BindingSource stateListBindingSource;
-        private System.Windows.Forms.DataGridViewTextBoxColumn urlDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn stateDataGridViewTextBoxColumn;
+        private System.Windows.Forms.ListBox urlListBox;
+        private System.Windows.Forms.ListBox stateListBox;
+        private System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.Button stopButton;
     }
 }
 

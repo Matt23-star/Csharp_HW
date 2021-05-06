@@ -5,16 +5,16 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 using System.Windows.Forms;
+using System.Collections;
 
 namespace Crawler
 {
     public partial class Form1 : Form
     {
         private SimpleCrawler simpleCrawler = new SimpleCrawler();
-        private Url url;
-        private State state;
+        private bool flag = false;
         public string startURL { get; set; }
         public SimpleCrawler SimpleCrawler { get; set; } = new SimpleCrawler();
 
@@ -22,7 +22,8 @@ namespace Crawler
         {
             InitializeComponent();
             urlTextBox.DataBindings.Add("Text", this, "startURL");
-            messages.DataSource = simpleCrawler.stateList;
+            stateBindingSource.DataSource = simpleCrawler.stateList;
+            urlBindingSource.DataSource = simpleCrawler.urlList;
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
@@ -42,10 +43,23 @@ namespace Crawler
 
         private void sendURL_Click(object sender, EventArgs e)
         {
-
-            simpleCrawler.urls.Add(startURL, false);
+            simpleCrawler.urls = new Hashtable();
+            if (startURL == null)
+            {
+                MessageBox.Show("请输入需要爬取的URL");
+                return;
+            }
+            if (!flag)
+            {
+                simpleCrawler.urls.Add(startURL, false);
+                flag = true;
+            }
+            urlListBox.DataSource = simpleCrawler.urlList;
+            stateListBox.DataSource = simpleCrawler.stateList;
             while (true)
             {
+                //if (this.stopButton.DialogResult.ToString() == "OK")
+                //    break;
                 string current = null;
                 foreach (string url in simpleCrawler.urls.Keys)
                 {
@@ -54,15 +68,26 @@ namespace Crawler
                 }
 
                 if (current == null || simpleCrawler.count > 10) break;
-                url = new Url(current);
-                simpleCrawler.urlList.Add(url);
-                webBindingSource1.DataSource = simpleCrawler.urlList;
+                simpleCrawler.urlList.Add(new Url(current));
                 string html = simpleCrawler.DownLoad(current);
-                stateBindingSource.DataSource = simpleCrawler.stateList;
                 simpleCrawler.urls[current] = true;
                 simpleCrawler.count++;
                 simpleCrawler.Parse(html, startURL);
+
+                messagesSource.ResetBindings(false);
+                urlBindingSource.ResetBindings(false);
+                stateBindingSource.ResetBindings(false);
             }
+        }
+
+        private void stateListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void stopButton_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -16,7 +16,6 @@ namespace Crawler {
         public int count { get; set; } = 0;
         public List<Url> urlList { get; set; } = new List<Url>();
         public List<State> stateList { get; set; } = new List<State>();
-        private State state;
 
         public string DownLoad(string url)
         {
@@ -27,8 +26,7 @@ namespace Crawler {
                 string html = webClient.DownloadString(url);
                 string fileName = count.ToString();
                 File.WriteAllText(fileName, html, Encoding.UTF8);
-                state = new State("爬取成功");
-                stateList.Add(state);
+                stateList.Add(new State("爬取成功"));
                 return html;
             }
             catch (Exception ex)
@@ -40,23 +38,17 @@ namespace Crawler {
 
         public void Parse(string html, string startUrl)
         {
-            string strRef = @"(href|HREF)[]*=[]*[""'][^""'#>]+(html|htm|aspx|jsp)[""']";
+            string strRef = @"(href|HREF)[]*=[]*[""'][^""'#>]+(.html|.htm|.aspx|.jsp)[""']";
             MatchCollection matches = new Regex(strRef).Matches(html);
             foreach (Match match in matches)
             {
                 strRef = match.Value.Substring(match.Value.IndexOf('=') + 1)
                           .Trim('"', '\"', '#', '>');
                 if (strRef.Length == 0) continue;
-                if (!Regex.IsMatch(strRef, @"http"))
-                {
-                    strRef = startUrl + strRef.Substring(1, strRef.Length - 1);
-                }
-                else if (!Regex.IsMatch(strRef, startUrl))
-                {
-                    continue;
-                }
+                strRef = startUrl + strRef.Substring(1, strRef.Length - 1);
                 if (urls[strRef] == null) urls[strRef] = false;
             }
         }
+
     }
 }
