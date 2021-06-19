@@ -16,5 +16,10 @@ namespace homework10
         {
             InitializeComponent();
         }
+
+        private void dgvResult_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }

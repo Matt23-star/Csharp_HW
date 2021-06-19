@@ -1,0 +1,7 @@
+D:\Homework11\OrderFunction\bin\Debug\OrderFunction.exe.config
+D:\Homework11\OrderFunction\bin\Debug\OrderFunction.exe
+D:\Homework11\OrderFunction\bin\Debug\OrderFunction.pdb
+D:\Homework11\OrderFunction\obj\Debug\OrderFunction.csprojAssemblyReference.cache
+D:\Homework11\OrderFunction\obj\Debug\OrderFunction.csproj.CoreCompileInputs.cache
+D:\Homework11\OrderFunction\obj\Debug\OrderFunction.exe
+D:\Homework11\OrderFunction\obj\Debug\OrderFunction.pdb
